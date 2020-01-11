@@ -8,6 +8,10 @@
     "dev": "gulp build",
     "serve": "gulp serve"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/craigmcn/words.git"
+  },
   "keywords": [
     "words",
     "word",
