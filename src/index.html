@@ -7,6 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Words</title>
 
+    <meta name="description"
+        content="A word tile game based on Wonderful Word Weaving (http://wonderfulwordweaving.com/).">
+
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=wAdO0d8bp8">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=wAdO0d8bp8">
     <link rel="icon" type="image/png" sizes="194x194" href="/favicon-194x194.png?v=wAdO0d8bp8">
@@ -24,7 +27,7 @@
 
 <body>
 
-    <header class="header">
+    <header id="header" class="header">
         <div class="brand">
             <img src="/nameplate.2019-11-24.png" alt="" width="40">
             craigmcn
@@ -32,37 +35,44 @@
         <h1>Words</h1>
     </header>
 
-
     <main class="main">
 
-        <div class="m-h-lg" style="text-align: center;">
+        <section class="controls">
 
             <button id="reset" class="button button--secondary" type="button" title="Reset the grid"><span
-                    class="fad fa-undo-alt" aria-hidden="true"></span><span class="visually-hidden"> Reset the
+                    class="fad fa-undo-alt" aria-hidden="true"></span><span class="js-canHide"> Reset the
                     grid</span></button>
 
             <button id="roll" class="button button--danger" type="button" title="Roll the dice!"><span
-                    class="fad fa-cubes" aria-hidden="true"></span><span class="visually-hidden"> Roll the
+                    class="fad fa-cubes" aria-hidden="true"></span><span class="js-canHide"> Roll the
                     dice!</span></button>
 
             <button id="addRowTop" class="button" type="button" title="Add top row"><span class="fad fa-arrow-to-top"
-                    aria-hidden="true"></span><span class="visually-hidden"> Add top row</span></button>
+                    aria-hidden="true"></span><span class="js-canHide"> Add top row</span></button>
 
             <button id="addRowBottom" class="button" type="button" title="Add bottom row"><span
-                    class="fad fa-arrow-to-bottom" aria-hidden="true"></span><span class="visually-hidden"> Add bottom
+                    class="fad fa-arrow-to-bottom" aria-hidden="true"></span><span class="js-canHide"> Add bottom
                     row</span></button>
 
             <button id="addColumnLeft" class="button" type="button" title="Add left column"><span
-                    class="fad fa-arrow-to-left" aria-hidden="true"></span><span class="visually-hidden"> Add left
+                    class="fad fa-arrow-to-left" aria-hidden="true"></span><span class="js-canHide"> Add left
                     column</span></button>
 
             <button id="addColumnRight" class="button" type="button" title="Add right column"><span
-                    class="fad fa-arrow-to-right" aria-hidden="true"></span><span class="visually-hidden"> Add right
+                    class="fad fa-arrow-to-right" aria-hidden="true"></span><span class="js-canHide"> Add right
                     column</span></button>
 
-        </div>
+            <button id="toggleHeaderFooter" class="button" type="button" title="Toggle header, footer"><span
+                    class="fad fa-compress" aria-hidden="true"></span><span class="js-canHide"> Toggle header,
+                    footer</span></button>
 
-        <div class="flex flex--jc-center">
+            <button id="toggleButtonText" class="button" type="button" title="Toggle button text"><span
+                    class="fad fa-minus-square" aria-hidden="true"></span><span class="js-canHide"> Toggle button
+                    text</span></button>
+
+        </section>
+
+        <section class="flex flex--jc-center">
 
             <div id="letters" class="letters">
 
@@ -76,16 +86,24 @@
 
             </div>
 
+        </section>
+
+        <div id="notification" class="alert alert--info alert--removable alert--overlay" role="alert" hidden>
+            <div class="alert__icon" aria-hidden="true"><span class="far fa-2x fa-info-circle"></span></div>
+            <div class="alert__text">A new version is available. <a id="refresh" href="#">Refresh</a></div>
+            <button type="button" class="alert__close" aria-label="Close"><span class="fas fa-2x fa-times"
+                    aria-hidden="true"></span></button>
         </div>
 
     </main>
 
-    <footer>
+    <footer id="footer">
         Game play idea and letter dice values from <a href="http://wonderfulwordweaving.com/">Wonderful Word
             Weaving</a>.
     </footer>
 
     <script src="./scripts.js"></script>
+    <script src="https://www.craigmcn.com/albertcss/js/albertcss.min.js"></script>
     <script src="https://kit.fontawesome.com/453b852cdd.js"></script>
 
 </body>

@@ -1,3 +1,33 @@
+// https://deanhume.com/displaying-a-new-version-available-progressive-web-app/
+let newWorker
+document.getElementById('refresh').addEventListener('click', function() {
+  newWorker.postMessage({ action: 'skipWaiting' })
+})
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').then(reg => {
+    reg.addEventListener('updatefound', () => {
+      newWorker = reg.installing
+      newWorker.addEventListener('statechange', () => {
+        switch (newWorker.state) {
+          case 'installed':
+            if (navigator.serviceWorker.controller) {
+              let notification = document.getElementById('notification ')
+              notification.removeAttribute('hidden')
+            }
+            break
+        }
+      })
+    })
+  })
+
+  let refreshing
+  navigator.serviceWorker.addEventListener('controllerchange', function() {
+    if (refreshing) return
+    window.location.reload()
+    refreshing = true
+  })
+}
+
 /* Data */
 const dice = [
   ['D', 'E', 'N', 'O', 'S', 'W'],
@@ -231,10 +261,10 @@ const clearDragOver = () => {
 }
 
 const initDragging = el => {
-  el.addEventListener('touchstart', handleDragStart)
+  el.addEventListener('touchstart', handleDragStart, { passive: true })
   el.addEventListener('dragstart', handleDragStart)
-  el.addEventListener('touchmove', handleTouchMove)
-  el.addEventListener('touchend', handleTouchEnd)
+  el.addEventListener('touchmove', handleTouchMove, { passive: true })
+  el.addEventListener('touchend', handleTouchEnd, { passive: true })
   el.addEventListener('dragend', handleDragEnd)
 }
 
@@ -315,7 +345,43 @@ document
 document
   .getElementById('addColumnRight')
   .addEventListener('click', addColumnRight)
+document.getElementById('toggleHeaderFooter').addEventListener('click', () => {
+  const header = document.getElementById('header')
+  const footer = document.getElementById('footer')
+  if (header.classList.contains('visually-hidden')) {
+    window.localStorage.removeItem('craigmcn-words-compress')
+    header.classList.remove('visually-hidden')
+    footer.classList.remove('visually-hidden')
+  } else {
+    window.localStorage.setItem('craigmcn-words-compress', 'true')
+    header.classList.add('visually-hidden')
+    footer.classList.add('visually-hidden')
+  }
+})
+document.getElementById('toggleButtonText').addEventListener('click', () => {
+  const buttonText = [...document.querySelectorAll('span.js-canHide')]
+  const footer = document.getElementById('footer')
+  if (buttonText[0].classList.contains('visually-hidden')) {
+    window.localStorage.removeItem('craigmcn-words-icons-only')
+    buttonText.forEach(b => b.classList.remove('visually-hidden'))
+  } else {
+    window.localStorage.setItem('craigmcn-words-icons-only', 'true')
+    buttonText.forEach(b => b.classList.add('visually-hidden'))
+  }
+})
 
 // on load
+// handle localStorage
+const compress = window.localStorage.getItem('craigmcn-words-compress')
+const iconsOnly = window.localStorage.getItem('craigmcn-words-icons-only')
+if (!!compress) {
+  header.classList.add('visually-hidden')
+  footer.classList.add('visually-hidden')
+}
+if (!!iconsOnly) {
+  ;[...document.querySelectorAll('span.js-canHide')].forEach(b =>
+    b.classList.add('visually-hidden')
+  )
+}
 initDropping(document.getElementById('letters'))
 roll()

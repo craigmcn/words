@@ -25,6 +25,24 @@ footer {
     overflow: auto;
 }
 
+.controls {
+    margin-bottom: $spacing / 2;
+    margin-left: $spacing / 2;
+    margin-top: $spacing / 2;
+    
+    @media (min-width: 544px) {
+        margin-bottom: $spacing;
+        margin-left: 0;
+        margin-top: $spacing;
+        text-align: center;
+    }
+    
+    @media (min-width: 768px) {
+        margin-bottom: $spacing * 1.5;
+        margin-top: $spacing * 1.5;
+    }
+}
+
 .letters__list {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -85,4 +103,8 @@ footer {
 
 [draggable="false"] {
     cursor: not-allowed;
+}
+
+[hidden] {
+    display: none !important;
 }
