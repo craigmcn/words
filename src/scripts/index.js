@@ -1,6 +1,6 @@
 // https://deanhume.com/displaying-a-new-version-available-progressive-web-app/
 let newWorker
-document.getElementById('refresh').addEventListener('click', function() {
+document.getElementById('refresh').addEventListener('click', function () {
   newWorker.postMessage({ action: 'skipWaiting' })
 })
 if ('serviceWorker' in navigator) {
@@ -21,7 +21,7 @@ if ('serviceWorker' in navigator) {
   })
 
   let refreshing
-  navigator.serviceWorker.addEventListener('controllerchange', function() {
+  navigator.serviceWorker.addEventListener('controllerchange', function () {
     if (refreshing) return
     window.location.reload()
     refreshing = true
@@ -263,7 +263,7 @@ const clearDragOver = () => {
 const initDragging = el => {
   el.addEventListener('touchstart', handleDragStart, { passive: true })
   el.addEventListener('dragstart', handleDragStart)
-  el.addEventListener('touchmove', handleTouchMove, { passive: true })
+  el.addEventListener('touchmove', handleTouchMove)
   el.addEventListener('touchend', handleTouchEnd, { passive: true })
   el.addEventListener('dragend', handleDragEnd)
 }
@@ -349,11 +349,11 @@ document.getElementById('toggleHeaderFooter').addEventListener('click', () => {
   const header = document.getElementById('header')
   const footer = document.getElementById('footer')
   if (header.classList.contains('visually-hidden')) {
-    window.localStorage.removeItem('craigmcn-words-compress')
+    window.localStorage.removeItem('compress')
     header.classList.remove('visually-hidden')
     footer.classList.remove('visually-hidden')
   } else {
-    window.localStorage.setItem('craigmcn-words-compress', 'true')
+    window.localStorage.setItem('compress', 'true')
     header.classList.add('visually-hidden')
     footer.classList.add('visually-hidden')
   }
@@ -362,18 +362,18 @@ document.getElementById('toggleButtonText').addEventListener('click', () => {
   const buttonText = [...document.querySelectorAll('span.js-canHide')]
   const footer = document.getElementById('footer')
   if (buttonText[0].classList.contains('visually-hidden')) {
-    window.localStorage.removeItem('craigmcn-words-icons-only')
+    window.localStorage.removeItem('iconsOnly')
     buttonText.forEach(b => b.classList.remove('visually-hidden'))
   } else {
-    window.localStorage.setItem('craigmcn-words-icons-only', 'true')
+    window.localStorage.setItem('iconsOnly', 'true')
     buttonText.forEach(b => b.classList.add('visually-hidden'))
   }
 })
 
 // on load
 // handle localStorage
-const compress = window.localStorage.getItem('craigmcn-words-compress')
-const iconsOnly = window.localStorage.getItem('craigmcn-words-icons-only')
+const compress = window.localStorage.getItem('compress')
+const iconsOnly = window.localStorage.getItem('iconsOnly')
 if (!!compress) {
   header.classList.add('visually-hidden')
   footer.classList.add('visually-hidden')

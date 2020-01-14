@@ -85,7 +85,7 @@ gulp.task('browserSync', () => {
     server: './tmp',
   })
   gulp.watch(
-    ['src/styles/**/*.scss', 'src/scripts/**/*.js', 'src/**/*.html'],
+    ['src/styles/**/*.scss', 'src/scripts/**/*.js', 'src/**/*.html', './src/sw.js'],
     gulp.series('build', 'reload')
   )
 })
