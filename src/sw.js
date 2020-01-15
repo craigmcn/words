@@ -14,7 +14,7 @@
 // Names of the two caches used in this version of the service worker.
 // Change to v2, etc. when you update any of the local resources, which will
 // in turn trigger the install event again.
-const PRECACHE = 'precache-v2'
+const PRECACHE = 'precache-v3'
 const RUNTIME = 'runtime'
 
 // A list of local resources we always want to be cached.
@@ -57,11 +57,11 @@ self.addEventListener('activate', event => {
   )
 })
 
-self.addEventListener('message', function (event) {
+self.addEventListener('message', function(event) {
   if (event.data.action === 'skipWaiting') {
-    self.skipWaiting();
+    self.skipWaiting()
   }
-});
+})
 
 // The fetch handler serves responses for same-origin resources from a cache.
 // If no response is found, it populates the runtime cache with the response

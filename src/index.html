@@ -35,56 +35,53 @@
         <h1>Words</h1>
     </header>
 
-    <main class="main">
+    <main class="main flex flex--jc-center">
 
         <section class="controls">
 
             <button id="reset" class="button button--secondary" type="button" title="Reset the grid"><span
-                    class="fad fa-undo-alt" aria-hidden="true"></span><span class="js-canHide"> Reset the
+                    class="fad fa-fw fa-undo-alt" aria-hidden="true"></span><span class="js-canHide"> Reset the
                     grid</span></button>
 
             <button id="roll" class="button button--danger" type="button" title="Roll the dice!"><span
-                    class="fad fa-cubes" aria-hidden="true"></span><span class="js-canHide"> Roll the
+                    class="fad fa-fw fa-cubes" aria-hidden="true"></span><span class="js-canHide"> Roll the
                     dice!</span></button>
 
-            <button id="addRowTop" class="button" type="button" title="Add top row"><span class="fad fa-arrow-to-top"
-                    aria-hidden="true"></span><span class="js-canHide"> Add top row</span></button>
+            <button id="addRowTop" class="button" type="button" title="Add top row"><span
+                    class="fad fa-fw fa-arrow-to-top" aria-hidden="true"></span><span class="js-canHide"> Add top
+                    row</span></button>
 
             <button id="addRowBottom" class="button" type="button" title="Add bottom row"><span
-                    class="fad fa-arrow-to-bottom" aria-hidden="true"></span><span class="js-canHide"> Add bottom
+                    class="fad fa-fw fa-arrow-to-bottom" aria-hidden="true"></span><span class="js-canHide"> Add bottom
                     row</span></button>
 
             <button id="addColumnLeft" class="button" type="button" title="Add left column"><span
-                    class="fad fa-arrow-to-left" aria-hidden="true"></span><span class="js-canHide"> Add left
+                    class="fad fa-fw fa-arrow-to-left" aria-hidden="true"></span><span class="js-canHide"> Add left
                     column</span></button>
 
             <button id="addColumnRight" class="button" type="button" title="Add right column"><span
-                    class="fad fa-arrow-to-right" aria-hidden="true"></span><span class="js-canHide"> Add right
+                    class="fad fa-fw fa-arrow-to-right" aria-hidden="true"></span><span class="js-canHide"> Add right
                     column</span></button>
 
             <button id="toggleHeaderFooter" class="button" type="button" title="Toggle header, footer"><span
-                    class="fad fa-compress" aria-hidden="true"></span><span class="js-canHide"> Toggle header,
+                    class="fad fa-fw fa-compress" aria-hidden="true"></span><span class="js-canHide"> Toggle header,
                     footer</span></button>
 
             <button id="toggleButtonText" class="button" type="button" title="Toggle button text"><span
-                    class="fad fa-minus-square" aria-hidden="true"></span><span class="js-canHide"> Toggle button
+                    class="fad fa-fw fa-minus-square" aria-hidden="true"></span><span class="js-canHide"> Toggle button
                     text</span></button>
 
         </section>
 
-        <section class="flex flex--jc-center">
+        <section id="letters" class="letters m-l-sm">
 
-            <div id="letters" class="letters">
+            <ul id="letters__list" class="letters__list"></ul>
 
-                <ul id="letters__list" class="letters__list"></ul>
+        </section>
 
-            </div>
+        <section id="words" class="words">
 
-            <div id="words" class="words">
-
-                <table id="words__grid"></table>
-
-            </div>
+            <table id="words__grid" class="words__grid"></table>
 
         </section>
 
