@@ -1,7 +1,9 @@
 // https://deanhume.com/displaying-a-new-version-available-progressive-web-app/
 let newWorker
-document.getElementById('refresh').addEventListener('click', function () {
+document.getElementById('refresh').addEventListener('click', e => {
+  e.preventDefault()
   newWorker.postMessage({ action: 'skipWaiting' })
+  window.location.reload()
 })
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').then(reg => {
@@ -11,20 +13,12 @@ if ('serviceWorker' in navigator) {
         switch (newWorker.state) {
           case 'installed':
             if (navigator.serviceWorker.controller) {
-              let notification = document.getElementById('notification ')
-              notification.removeAttribute('hidden')
+              document.getElementById('notification').removeAttribute('hidden')
             }
             break
         }
       })
     })
-  })
-
-  let refreshing
-  navigator.serviceWorker.addEventListener('controllerchange', function () {
-    if (refreshing) return
-    window.location.reload()
-    refreshing = true
   })
 }
 
