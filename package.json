@@ -1,6 +1,6 @@
 {
   "name": "words",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "description": "A word tile game based on Wonderful Word Weaving (http://wonderfulwordweaving.com/).",
   "main": "gulpfile.js",
   "scripts": {

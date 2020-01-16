@@ -30,7 +30,7 @@ gulp.task('styles', done => {
     .pipe(sass(sassOptions[env]).on('error', sass.logError))
     .pipe(autoprefixer())
     .pipe(flatten())
-    .pipe(gulp.dest(output[env]))
+    .pipe(gulp.dest(`${output[env]}/css`))
   done()
 })
 
@@ -58,7 +58,15 @@ gulp.task('scripts', done => {
     .pipe(gulpif(env === 'production', buffer()))
     .pipe(gulpif(env === 'production', uglify()))
     .pipe(flatten())
-    .pipe(gulp.dest(output[env]))
+    .pipe(gulp.dest(`${output[env]}/js`))
+  done()
+})
+
+// Vendor
+gulp.task('vendor-css', done => {
+  gulp
+    .src(['./src/styles/albert.min.css'])
+    .pipe(gulp.dest(`${output[env]}/css`))
   done()
 })
 
@@ -71,7 +79,7 @@ gulp.task('html', done => {
 })
 
 // Build
-gulp.task('build', gulp.parallel('styles', 'scripts', 'html'))
+gulp.task('build', gulp.parallel('styles', 'scripts', 'vendor-css', 'html'))
 
 // Reload browser
 gulp.task('reload', done => {
@@ -85,7 +93,12 @@ gulp.task('browserSync', () => {
     server: './tmp',
   })
   gulp.watch(
-    ['src/styles/**/*.scss', 'src/scripts/**/*.js', 'src/**/*.html', './src/sw.js'],
+    [
+      'src/styles/**/*.scss',
+      'src/scripts/**/*.js',
+      'src/**/*.html',
+      './src/sw.js',
+    ],
     gulp.series('build', 'reload')
   )
 })

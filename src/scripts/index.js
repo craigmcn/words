@@ -1,6 +1,6 @@
 // https://deanhume.com/displaying-a-new-version-available-progressive-web-app/
 let newWorker
-document.getElementById('refresh').addEventListener('click', e => {
+document.getElementById('reload').addEventListener('click', e => {
   e.preventDefault()
   newWorker.postMessage({ action: 'skipWaiting' })
   window.location.reload()
@@ -339,7 +339,8 @@ document
 document
   .getElementById('addColumnRight')
   .addEventListener('click', addColumnRight)
-document.getElementById('toggleHeaderFooter').addEventListener('click', () => {
+document.getElementById('toggleHeaderFooter').addEventListener('click', e => {
+  const el = e.currentTarget
   const header = document.getElementById('header')
   const footer = document.getElementById('footer')
   if (header.classList.contains('visually-hidden')) {
@@ -351,8 +352,16 @@ document.getElementById('toggleHeaderFooter').addEventListener('click', () => {
     header.classList.add('visually-hidden')
     footer.classList.add('visually-hidden')
   }
+  ;[...el.querySelectorAll('svg')].forEach(s => {
+    if (s.hasAttribute('hidden')) {
+      s.removeAttribute('hidden')
+    } else {
+      s.setAttribute('hidden', true)
+    }
+  })
 })
-document.getElementById('toggleButtonText').addEventListener('click', () => {
+document.getElementById('toggleButtonText').addEventListener('click', e => {
+  const el = e.currentTarget
   const buttonText = [...document.querySelectorAll('span.js-canHide')]
   const footer = document.getElementById('footer')
   if (buttonText[0].classList.contains('visually-hidden')) {
@@ -362,6 +371,13 @@ document.getElementById('toggleButtonText').addEventListener('click', () => {
     window.localStorage.setItem('iconsOnly', 'true')
     buttonText.forEach(b => b.classList.add('visually-hidden'))
   }
+  ;[...el.querySelectorAll('svg')].forEach(s => {
+    if (s.hasAttribute('hidden')) {
+      s.removeAttribute('hidden')
+    } else {
+      s.setAttribute('hidden', true)
+    }
+  })
 })
 
 // on load
