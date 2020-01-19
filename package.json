@@ -1,6 +1,6 @@
 {
   "name": "words",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "A word tile game based on Wonderful Word Weaving (http://wonderfulwordweaving.com/).",
   "main": "gulpfile.js",
   "scripts": {
@@ -24,8 +24,8 @@
   "author": "Craig McNaughton",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "@babel/core": "^7.7.7",
-    "@babel/preset-env": "^7.7.7",
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
     "babelify": "^10.0.0",
     "browser-sync": "^2.26.7",
     "browserify": "^16.5.0",
