@@ -328,6 +328,66 @@ const addColumnRight = () => {
   addColumn('right')
 }
 
+/* Toggle actions */
+const toggleHeaderFooterButton = document.getElementById('toggleHeaderFooter')
+const toggleButtonTextButton = document.getElementById('toggleButtonText')
+const header = document.getElementById('header')
+const footer = document.getElementById('footer')
+const buttonText = [...document.querySelectorAll('span.js-canHide')]
+
+const showHeaderFooter = () => {
+  window.localStorage.removeItem('compress')
+  header.classList.remove('visually-hidden')
+  footer.classList.remove('visually-hidden')
+}
+
+const hideHeaderFooter = () => {
+  window.localStorage.setItem('compress', 'true')
+  header.classList.add('visually-hidden')
+  footer.classList.add('visually-hidden')
+}
+
+const toggleHeaderFooter = e => {
+  const el = e.currentTarget
+  if (header.classList.contains('visually-hidden')) {
+    showHeaderFooter()
+  } else {
+    hideHeaderFooter()
+  }
+  swapIcons(el)
+}
+
+const showButtonText = () => {
+  window.localStorage.removeItem('iconsOnly')
+  buttonText.forEach(b => b.classList.remove('visually-hidden'))
+}
+
+const hideButtonText = () => {
+  window.localStorage.setItem('iconsOnly', 'true')
+  buttonText.forEach(b => b.classList.add('visually-hidden'))
+}
+
+const toggleButtonText = e => {
+  const el = e.currentTarget
+  if (buttonText[0].classList.contains('visually-hidden')) {
+    showButtonText()
+  } else {
+    hideButtonText()
+  }
+  swapIcons(el)
+}
+
+// Swap icons
+const swapIcons = el => {
+  ;[...el.querySelectorAll('svg')].forEach(s => {
+    if (s.hasAttribute('hidden')) {
+      s.removeAttribute('hidden')
+    } else {
+      s.setAttribute('hidden', true)
+    }
+  })
+}
+
 /* Action buttons */
 document.getElementById('roll').addEventListener('click', roll)
 document.getElementById('reset').addEventListener('click', resetGrid)
@@ -339,59 +399,24 @@ document
 document
   .getElementById('addColumnRight')
   .addEventListener('click', addColumnRight)
-document.getElementById('toggleHeaderFooter').addEventListener('click', e => {
-  const el = e.currentTarget
-  const header = document.getElementById('header')
-  const footer = document.getElementById('footer')
-  if (header.classList.contains('visually-hidden')) {
-    window.localStorage.removeItem('compress')
-    header.classList.remove('visually-hidden')
-    footer.classList.remove('visually-hidden')
-  } else {
-    window.localStorage.setItem('compress', 'true')
-    header.classList.add('visually-hidden')
-    footer.classList.add('visually-hidden')
-  }
-  ;[...el.querySelectorAll('svg')].forEach(s => {
-    if (s.hasAttribute('hidden')) {
-      s.removeAttribute('hidden')
-    } else {
-      s.setAttribute('hidden', true)
-    }
-  })
-})
-document.getElementById('toggleButtonText').addEventListener('click', e => {
-  const el = e.currentTarget
-  const buttonText = [...document.querySelectorAll('span.js-canHide')]
-  const footer = document.getElementById('footer')
-  if (buttonText[0].classList.contains('visually-hidden')) {
-    window.localStorage.removeItem('iconsOnly')
-    buttonText.forEach(b => b.classList.remove('visually-hidden'))
-  } else {
-    window.localStorage.setItem('iconsOnly', 'true')
-    buttonText.forEach(b => b.classList.add('visually-hidden'))
-  }
-  ;[...el.querySelectorAll('svg')].forEach(s => {
-    if (s.hasAttribute('hidden')) {
-      s.removeAttribute('hidden')
-    } else {
-      s.setAttribute('hidden', true)
-    }
-  })
-})
+toggleHeaderFooterButton.addEventListener('click', toggleHeaderFooter)
+toggleButtonTextButton.addEventListener('click', toggleButtonText)
 
 // on load
+// clean up old data
+window.localStorage.removeItem('craigmcn-words-compress')
+window.localStorage.removeItem('craigmcn-words-icons-only')
 // handle localStorage
 const compress = window.localStorage.getItem('compress')
 const iconsOnly = window.localStorage.getItem('iconsOnly')
 if (!!compress) {
-  header.classList.add('visually-hidden')
-  footer.classList.add('visually-hidden')
+  hideHeaderFooter()
+  swapIcons(toggleHeaderFooterButton)
 }
 if (!!iconsOnly) {
-  ;[...document.querySelectorAll('span.js-canHide')].forEach(b =>
-    b.classList.add('visually-hidden')
-  )
+  hideButtonText()
+  swapIcons(toggleButtonTextButton)
 }
+// intialize and start
 initDropping(document.getElementById('letters'))
 roll()
