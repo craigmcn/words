@@ -88,6 +88,10 @@ footer {
     padding: $spacing / 2;
     text-align: center;
     min-width: 2.5rem;
+
+    &:empty::after {
+        content: "\00a0";
+    }
     
     @media (min-width: 992px) {
         padding: $spacing;
