@@ -112,7 +112,7 @@ const addRow = (direction = 'top') => {
   const game = getGame()
   if (direction === 'top') {
     $words.insertBefore(
-      createGridRow(game.grid.width, 0),
+      createGridRow(game.grid.width, 0, false),
       $words.firstChild,
       false
     )
@@ -121,25 +121,24 @@ const addRow = (direction = 'top') => {
     $words.appendChild(createGridRow(game.grid.width, game.grid.height, false))
     game.grid.rows.push(Array(game.grid.width).fill(''))
   }
+  game.grid.height++
   setGame(game)
-  setHeight(++game.grid.height)
   indexGrid()
 }
 
 const addColumn = (direction = 'left') => {
   const game = getGame()
-  let width = getWidth()
   ;[...$words.querySelectorAll('tr')].forEach((tr, r) => {
     if (direction === 'left') {
       tr.insertBefore(createGridCell(r, 0, false), tr.firstChild)
       game.grid.rows[r].unshift('')
     } else {
-      tr.appendChild(createGridCell(r, width, false))
+      tr.appendChild(createGridCell(r, game.grid.width, false))
       game.grid.rows[r].push('')
     }
   })
+  game.grid.width++
   setGame(game)
-  setWidth(++width)
   indexGrid()
 }
 
