@@ -15,14 +15,13 @@ export const hideHeaderFooter = () => {
   footer.classList.add('visually-hidden')
 }
 
-export const toggleHeaderFooter = e => {
-  const el = e.currentTarget
+export const toggleHeaderFooter = () => {
   if (header.classList.contains('visually-hidden')) {
     showHeaderFooter()
   } else {
     hideHeaderFooter()
   }
-  swapIcons(el)
+  swapIcons(document.getElementById('toggleHeaderFooter'))
 }
 
 const showButtonText = () => {
@@ -35,14 +34,13 @@ export const hideButtonText = () => {
   buttonText.forEach(b => b.classList.add('visually-hidden'))
 }
 
-export const toggleButtonText = e => {
-  const el = e.currentTarget
+export const toggleButtonText = () => {
   if (buttonText[0].classList.contains('visually-hidden')) {
     showButtonText()
   } else {
     hideButtonText()
   }
-  swapIcons(el)
+  swapIcons(document.getElementById('toggleButtonText'))
 }
 
 // Swap icons

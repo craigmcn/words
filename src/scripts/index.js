@@ -9,6 +9,7 @@ import {
   resetGrid,
 } from './grid'
 import { toggleButtonText, toggleHeaderFooter } from './toggle'
+import { handleKeyboard } from './keyboard'
 
 cleanup()
 registerServiceWorker()
@@ -24,6 +25,7 @@ document
 document
   .getElementById('addColumnRight')
   .addEventListener('click', addColumnRight)
+document.addEventListener('keyup', handleKeyboard, false)
 document
   .getElementById('toggleHeaderFooter')
   .addEventListener('click', toggleHeaderFooter)
