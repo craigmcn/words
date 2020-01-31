@@ -37,7 +37,7 @@
 
         <section class="controls">
             <!-- Button SVG icons are from Font Awesome 5, replaced to avoid added JS and HTTP requests -->
-            <button id="roll" class="button button--danger m-b-xl" type="button" title="Roll the dice!">
+            <button id="roll" class="button button--danger m-b-xl" type="button" title="Roll the dice! (Ctrl + Enter)">
                 <svg class="icon" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512">
                     <g>
@@ -52,7 +52,7 @@
                 <span class="js-canHide"> Roll the dice!</span>
             </button>
 
-            <button id="reset" class="button button--secondary" type="button" title="Reset the grid">
+            <button id="reset" class="button button--secondary" type="button" title="Reset the grid (Ctrl + Home)">
                 <svg class="icon" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512">
                     <g>
@@ -67,7 +67,7 @@
                 <span class="js-canHide"> Reset the grid</span>
             </button>
 
-            <button id="addRowTop" class="button" type="button" title="Add top row">
+            <button id="addRowTop" class="button" type="button" title="Add top row (Ctrl + Arrow up)">
                 <svg class="icon" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 384 512">
                     <g>
@@ -82,7 +82,7 @@
                 <span class="js-canHide"> Add top row</span>
             </button>
 
-            <button id="addRowBottom" class="button" type="button" title="Add bottom row">
+            <button id="addRowBottom" class="button" type="button" title="Add bottom row (Ctrl + Arrow down)">
                 <svg class="icon" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 384 512">
                     <g>
@@ -97,7 +97,7 @@
                 <span class="js-canHide"> Add bottom row</span>
             </button>
 
-            <button id="addColumnLeft" class="button" type="button" title="Add left column">
+            <button id="addColumnLeft" class="button" type="button" title="Add left column (Ctrl + Arrow left)">
                 <svg class="icon" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 448 512">
                     <g>
@@ -112,7 +112,7 @@
                 <span class="js-canHide"> Add left column</span>
             </button>
 
-            <button id="addColumnRight" class="button" type="button" title="Add right column">
+            <button id="addColumnRight" class="button" type="button" title="Add right column (Ctrl + Arrow right)">
                 <svg class="icon" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 448 512">
                     <g>
@@ -127,7 +127,7 @@
                 <span class="js-canHide"> Add right column</span>
             </button>
 
-            <button id="toggleHeaderFooter" class="button" type="button" title="Toggle header, footer">
+            <button id="toggleHeaderFooter" class="button" type="button" title="Toggle header, footer (Ctrl + Del)">
                 <svg class="icon" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 448 512">
                     <g>
@@ -153,7 +153,7 @@
                 <span class="js-canHide"> Toggle header, footer</span>
             </button>
 
-            <button id="toggleButtonText" class="button" type="button" title="Toggle button text">
+            <button id="toggleButtonText" class="button" type="button" title="Toggle button text (Ctrl + Space)">
                 <svg class="icon" aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 448 512">
                     <path fill="currentColor"
@@ -370,8 +370,13 @@
     </div>
 
     <footer id="footer">
-        Game play idea and letter dice values from <a href="http://wonderfulwordweaving.com/">Wonderful Word
-            Weaving</a>.
+        <p>Game play idea and letter dice values from <a href="http://wonderfulwordweaving.com/">Wonderful Word
+                Weaving</a>.</p>
+        <ul>
+            <li>Drag letters onto the grid to spell words.</li>
+            <li>Drag letters off the grid to remove them.</li>
+            <li>Dragging a letter onto an occupied grid cell will return the previous letter to the list.</li>
+        </ul>
     </footer>
 
     <script src="./js/scripts.js"></script>
