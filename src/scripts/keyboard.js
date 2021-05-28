@@ -11,7 +11,7 @@ import { toggleButtonText, toggleHeaderFooter } from './toggle'
 export const handleKeyboard = e => {
     if (e.ctrlKey) {
         e.preventDefault()
-        console.log(e.keyCode)
+
         switch (e.keyCode) {
             case 13: // Enter
                 roll()
