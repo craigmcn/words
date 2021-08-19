@@ -88,10 +88,9 @@ gulp.task('sw', () => {
 
 // HTML
 gulp.task('html', () => {
-    return gulp.src(['./src/**/*.html', './src/site.webmanifest']).pipe(
-        gulp.dest(output[env])
+    return gulp.src(['./src/**/*.html', './src/site.webmanifest'])
+        .pipe(gulp.dest(output[env]))
         .pipe(gulpif(env === 'netlify', gulp.dest(outputNetlify)))
-    )
 })
 
 // Build
