@@ -1,4 +1,6 @@
-import { roll } from './game'
+import {
+    roll,
+} from './game'
 import {
     addRowTop,
     addRowBottom,
@@ -6,9 +8,12 @@ import {
     addColumnRight,
     resetGrid,
 } from './grid'
-import { toggleButtonText, toggleHeaderFooter } from './toggle'
+import {
+    toggleButtonText,
+    toggleHeaderFooter,
+} from './toggle'
 
-export const handleKeyboard = e => {
+export const handleKeyboard = (e) => {
     if (e.ctrlKey) {
         e.preventDefault()
 
@@ -38,7 +43,6 @@ export const handleKeyboard = e => {
                 toggleButtonText()
                 break
             default:
-                return
         }
     }
 }

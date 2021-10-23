@@ -1,6 +1,11 @@
-import { cleanup } from './cleanup'
+import {
+    cleanup,
+} from './cleanup'
 import registerServiceWorker from './serviceWorker'
-import { initialize, roll } from './game'
+import {
+    initialize,
+    roll,
+} from './game'
 import {
     addRowTop,
     addRowBottom,
@@ -8,8 +13,13 @@ import {
     addColumnRight,
     resetGrid,
 } from './grid'
-import { toggleButtonText, toggleHeaderFooter } from './toggle'
-import { handleKeyboard } from './keyboard'
+import {
+    toggleButtonText,
+    toggleHeaderFooter,
+} from './toggle'
+import {
+    handleKeyboard,
+} from './keyboard'
 import tippy from 'tippy.js'
 
 cleanup()
@@ -38,4 +48,6 @@ document
 initialize()
 
 // initialize tooltips
-tippy('[data-tippy-content]', { placement: 'right' })
+tippy('[data-tippy-content]', {
+    placement: 'right',
+})

@@ -12,8 +12,8 @@ const outputNetlify = `${output[env]}/words`
 const browserSync = require('browser-sync').create()
 
 // CSS
-const sass = require('gulp-sass')(require('sass')),
-    autoprefixer = require('gulp-autoprefixer')
+const sass = require('gulp-sass')(require('sass'))
+const autoprefixer = require('gulp-autoprefixer')
 
 const sassOptions = {
     development: {
@@ -40,11 +40,11 @@ gulp.task('styles', () => {
 })
 
 // JS
-const browserify = require('browserify'),
-    babelify = require('babelify'),
-    source = require('vinyl-source-stream'),
-    buffer = require('vinyl-buffer'),
-    uglify = require('gulp-uglify')
+const browserify = require('browserify')
+const babelify = require('babelify')
+const source = require('vinyl-source-stream')
+const buffer = require('vinyl-buffer')
+const uglify = require('gulp-uglify')
 
 gulp.task('scripts', () => {
     const b = browserify({
@@ -52,12 +52,13 @@ gulp.task('scripts', () => {
         debug: false,
     })
 
-    return b.transform(
-        babelify.configure({
-            presets: ['@babel/preset-env'],
-            sourceMaps: env !== 'development',
-        })
-    )
+    return b
+        .transform(
+            babelify.configure({
+                presets: ['@babel/preset-env'],
+                sourceMaps: env !== 'development',
+            }),
+        )
         .bundle()
         .pipe(source('scripts.js'))
         .pipe(gulpif(env !== 'development', buffer()))
@@ -69,11 +70,13 @@ gulp.task('scripts', () => {
 
 // Vendor
 gulp.task('vendor-css', () => {
-    return gulp.src([
-        './src/styles/albert.min.css',
-        './node_modules/tippy.js/dist/tippy.css',
-    ]).pipe(gulp.dest(`${output[env]}/css`))
-    .pipe(gulpif(env === 'netlify', gulp.dest(`${outputNetlify}/css`)))
+    return gulp
+        .src([
+            './src/styles/albert.min.css',
+            './node_modules/tippy.js/dist/tippy.css',
+        ])
+        .pipe(gulp.dest(`${output[env]}/css`))
+        .pipe(gulpif(env === 'netlify', gulp.dest(`${outputNetlify}/css`)))
 })
 
 // Service worker
@@ -97,7 +100,7 @@ gulp.task('html', () => {
 gulp.task('build', gulp.parallel('styles', 'scripts', 'vendor-css', 'sw', 'html'))
 
 // Reload browser
-gulp.task('reload', done => {
+gulp.task('reload', (done) => {
     browserSync.reload()
     done()
 })
@@ -115,7 +118,7 @@ gulp.task('browserSync', () => {
             'src/**/*.html',
             './src/sw.js',
         ],
-        gulp.series('build', 'reload')
+        gulp.series('build', 'reload'),
     )
 })
 
