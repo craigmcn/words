@@ -48,7 +48,7 @@ footer {
         padding-top: math.div($spacing, 2);
 
         &.complete {
-            background-color: color.adjust($green, $lightness: 72%);
+            background-color: color.scale($green, $lightness: 72%);
         }
     }
 }
@@ -133,7 +133,7 @@ footer {
 }
 
 .dragover {
-    background-color: color.adjust($primary, $lightness: 64%);
+    background-color: color.scale($primary, $lightness: 64%);
 }
 
 .icon {
