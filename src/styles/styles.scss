@@ -1,3 +1,4 @@
+@use 'sass:color';
 @use 'sass:math';
 
 /* Variables */
@@ -47,7 +48,7 @@ footer {
         padding-top: math.div($spacing, 2);
 
         &.complete {
-            background-color: lighten($green, 72%);
+            background-color: color.adjust($green, $lightness: 72%);
         }
     }
 }
@@ -132,7 +133,7 @@ footer {
 }
 
 .dragover {
-    background-color: lighten($primary, 64%);
+    background-color: color.adjust($primary, $lightness: 64%);
 }
 
 .icon {

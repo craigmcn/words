@@ -13,7 +13,6 @@ const browserSync = require('browser-sync').create()
 
 // CSS
 const sass = require('gulp-sass')(require('sass'))
-const autoprefixer = require('gulp-autoprefixer')
 
 const sassOptions = {
     development: {
@@ -33,7 +32,6 @@ const sassOptions = {
 gulp.task('styles', () => {
     return gulp.src('./src/styles/**/*.scss')
         .pipe(sass(sassOptions[env]).on('error', sass.logError))
-        .pipe(autoprefixer())
         .pipe(flatten())
         .pipe(gulp.dest(`${output[env]}/css`))
         .pipe(gulpif(env === 'netlify', gulp.dest(`${outputNetlify}/css`)))
