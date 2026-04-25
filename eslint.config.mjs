@@ -25,6 +25,15 @@ export default defineConfig([{
         ecmaVersion: 12,
         sourceType: 'module',
     },
+}, {
+    files: ['test/**/*.js'],
+
+    languageOptions: {
+        globals: {
+            ...globals.jest,
+        },
+    },
+}, {
 
     rules: {
         quotes: ['error', 'single'],
