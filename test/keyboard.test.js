@@ -1,19 +1,20 @@
 import { handleKeyboard } from '../src/scripts/keyboard'
+import { vi } from 'vitest'
 
 // Mock all modules that keyboard.js delegates to
-jest.mock('../src/scripts/game', () => ({
-    roll: jest.fn(),
+vi.mock('../src/scripts/game', () => ({
+    roll: vi.fn(),
 }))
-jest.mock('../src/scripts/grid', () => ({
-    resetGrid: jest.fn(),
-    addRowTop: jest.fn(),
-    addRowBottom: jest.fn(),
-    addColumnLeft: jest.fn(),
-    addColumnRight: jest.fn(),
+vi.mock('../src/scripts/grid', () => ({
+    resetGrid: vi.fn(),
+    addRowTop: vi.fn(),
+    addRowBottom: vi.fn(),
+    addColumnLeft: vi.fn(),
+    addColumnRight: vi.fn(),
 }))
-jest.mock('../src/scripts/toggle', () => ({
-    toggleHeaderFooter: jest.fn(),
-    toggleButtonText: jest.fn(),
+vi.mock('../src/scripts/toggle', () => ({
+    toggleHeaderFooter: vi.fn(),
+    toggleButtonText: vi.fn(),
 }))
 
 import { roll } from '../src/scripts/game'
@@ -21,18 +22,18 @@ import { resetGrid, addRowTop, addRowBottom, addColumnLeft, addColumnRight } fro
 import { toggleHeaderFooter, toggleButtonText } from '../src/scripts/toggle'
 
 const ctrlKey = (keyCode) => {
-    const e = { ctrlKey: true, keyCode, preventDefault: jest.fn() }
+    const e = { ctrlKey: true, keyCode, preventDefault: vi.fn() }
     handleKeyboard(e)
     return e
 }
 
 beforeEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
 })
 
 describe('handleKeyboard', () => {
     it('does nothing without ctrlKey', () => {
-        handleKeyboard({ ctrlKey: false, keyCode: 13, preventDefault: jest.fn() })
+        handleKeyboard({ ctrlKey: false, keyCode: 13, preventDefault: vi.fn() })
         expect(roll).not.toHaveBeenCalled()
     })
 

@@ -22,10 +22,8 @@ const PRECACHE_URLS = [
     './',
     './?source=pwa',
     'index.html',
-    './css/albert.min.css',
-    './css/tippy.css',
-    './css/styles.css',
-    './js/scripts.js',
+    './css/index.css',
+    './js/index.js',
 ]
 
 // The install handler takes care of pre-caching the resources we always need.

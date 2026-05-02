@@ -5,29 +5,30 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```bash
-npm run dev          # Build for development (output: ./tmp)
-npm run serve        # Build + start browser-sync dev server at localhost:3080
-npm run build        # Build for production (output: ./dist)
-npm run build:netlify  # Build for Netlify deployment (output: ./netlify)
-npm run lint         # Lint src and test JS files
-npm run lint:fix     # Lint and auto-fix src and test JS files
-npm test             # Run Jest test suite
-npm run test:watch   # Run Jest in watch mode
+yarn dev             # Start Vite dev server at localhost:3080
+yarn build           # Build for production (output: ./dist)
+yarn build:netlify   # Build for Netlify deployment (output: ./netlify + ./netlify/words/)
+yarn preview         # Preview production build at localhost:3080
+yarn lint            # Lint src and test JS files
+yarn lint:fix        # Lint and auto-fix src and test JS files
+yarn test            # Run Vitest test suite (single run)
+yarn test:watch      # Run Vitest in watch mode
+yarn coverage        # Run Vitest with coverage report
 ```
 
 ## Architecture
 
-This is a vanilla JS browser game — a word tile app based on Wonderful Word Weaving. The build pipeline uses **Gulp + Browserify + Babel**, compiling ES module source into a single `scripts.js` bundle.
+This is a vanilla JS browser game — a word tile app based on Wonderful Word Weaving. The build pipeline uses **Vite 8 + Sass**, compiling ES module source into a single `scripts.js` bundle.
 
 ### Build pipeline
 
-- **Styles:** `src/styles/**/*.scss` → compiled via `gulp-sass`, output to `{env}/css/`
-- **Scripts:** `src/scripts/index.js` (entry) → bundled by Browserify with Babelify, optionally uglified for non-dev envs, output to `{env}/js/scripts.js`
-- **Vendor CSS:** `albert.min.css` and `tippy.js/dist/tippy.css` copied to `{env}/css/`
-- **HTML/manifest:** copied as-is
-- **Service worker:** `src/sw.js` with `{buildtime}` placeholder replaced at build time
+- **Entry:** `src/index.html` — Vite root is `src/`
+- **Styles:** `src/styles/styles.scss` and `src/styles/albert.min.css` linked from HTML; `tippy.js/dist/tippy.css` imported via JS; all merged into `{env}/css/index.css`
+- **Scripts:** `src/scripts/index.js` → bundled by Vite/Rollup → `{env}/js/index.js`
+- **Service worker:** `src/sw.js` with `{buildtime}` placeholder replaced by a custom Vite plugin at build time → `{env}/sw.js`
+- **Static:** `src/site.webmanifest` → `{env}/assets/site.webmanifest`
 
-The `--env` flag drives output directory and minification: `development` → `./tmp`, `production` → `./dist`, `netlify` → `./netlify` (also outputs a `./netlify/words/` subdirectory copy for Netlify routing).
+The `--mode netlify` flag outputs to `./netlify`; a post-build script (`scripts/copy-netlify.mjs`) copies everything to `./netlify/words/` for Netlify routing under the `/words/` sub-path.
 
 ### Game state
 
@@ -59,16 +60,16 @@ Two UI preferences are also stored separately: `compress` (hide header/footer) a
 
 ### Tests
 
-Jest + jsdom. Test files live in `test/`. Run with `npm test`.
+Vitest + jsdom. Test files live in `test/`. Run with `yarn test`.
 
 - **`test/setup.js`** — global DOM fixture (header, footer, letter list, grid, toggle buttons) loaded before each test file so module-level DOM queries in source files resolve correctly
 - **`test/game.test.js`** — dice structure, `defaultGame`, `getGame`/`setGame`, `setComplete`
 - **`test/cleanup.test.js`** — legacy localStorage key removal
 - **`test/grid.test.js`** — height/width accessors, `updateGrid`, cell/row creation, `addRow*`/`addColumn*`
 - **`test/toggle.test.js`** — header/footer and button-text toggles, localStorage persistence, `swapIcons`
-- **`test/keyboard.test.js`** — all `Ctrl+` shortcuts dispatch the correct function (modules mocked)
+- **`test/keyboard.test.js`** — all `Ctrl+` shortcuts dispatch the correct function (modules mocked via `vi.mock`)
 
-`babel.config.js` applies `@babel/preset-env` in the `test` environment only (targets current Node); the gulp build is unaffected.
+Vitest is configured in `vite.config.js` (`test.globals: true`, `test.environment: 'jsdom'`). No separate `babel.config.js` or `jest.config.js`.
 
 ### Code style
 
