@@ -71,6 +71,27 @@ Vitest + jsdom. Test files live in `test/`. Run with `yarn test`.
 
 Vitest is configured in `vite.config.js` (`test.globals: true`, `test.environment: 'jsdom'`). No separate `babel.config.js` or `jest.config.js`.
 
+## Modernization status (2026-05-01)
+
+### Completed
+- **Node 24** — `.nvmrc` bumped from v22 → v24 (PR #52)
+- **Yarn 4** — switched from npm; `.yarnrc.yml` (node-modules linker); empty `yarn.lock` required to signal standalone project (parent dir has a Yarn workspace root)
+- **Vite 8** — replaced Gulp + Browserify + Babel; `root: src/`, `base: './'` for relative URLs under `/words/` sub-path
+- **Vitest 4** — replaced Jest + jest-environment-jsdom; config inline in `vite.config.js` (`globals: true`, `environment: jsdom`)
+- **CI** — `test.yml` updated: `corepack enable` → `setup-node` with `cache: yarn` → `yarn install --immutable` → lint → build → `yarn coverage`
+- **Branch protection** — require PR, 1 approval, `enforce_admins: false` (owner bypass), require `test` status check, dismiss stale reviews, block force push + deletion
+
+### Key decisions
+- **TypeScript: N/A** — intentionally vanilla JS PWA (same as `cryptogram`); not worth the migration cost for a game with no shared types
+- **Service worker** — hand-rolled `sw.js` (no workbox/vite-plugin-pwa); `{buildtime}` replaced via a custom Vite plugin in `generateBundle`; PRECACHE_URLS updated to merged `css/index.css` + `js/index.js`
+- **CSS output** — Vite merges all CSS (albert.min.css + styles.scss + tippy.css) into a single `css/index.css`; sw.js updated accordingly
+- **Netlify copy** — `scripts/copy-netlify.mjs` copies individual entries from `netlify/` → `netlify/words/` (not the directory itself, to avoid self-copy error)
+
+### Nothing outstanding
+Modernization is complete. No open TODOs or blockers.
+
+---
+
 ### Code style
 
 ESLint enforces: single quotes, no semicolons, 4-space indent (`SwitchCase: 1`), trailing commas on multiline, `arrow-parens` only when required for block bodies.
