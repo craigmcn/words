@@ -17,16 +17,16 @@ Your game is saved automatically. If you close the tab and come back, your grid 
 
 ## Controls
 
-| Button | Keyboard | Action |
-|---|---|---|
-| Roll the dice! | `Ctrl + Enter` | Roll new letters and start a fresh game |
-| Reset the grid | `Ctrl + Home` | Clear the grid (keeps the same letters) |
-| Add top row | `Ctrl + ↑` | Add a row above the grid |
-| Add bottom row | `Ctrl + ↓` | Add a row below the grid |
-| Add left column | `Ctrl + ←` | Add a column to the left of the grid |
-| Add right column | `Ctrl + →` | Add a column to the right of the grid |
-| Toggle header, footer | `Ctrl + Del` | Hide/show the header and footer for more space |
-| Toggle button text | `Ctrl + Space` | Switch the toolbar between text labels and icons only |
+| Button                | Keyboard       | Action                                                |
+| --------------------- | -------------- | ----------------------------------------------------- |
+| Roll the dice!        | `Ctrl + Enter` | Roll new letters and start a fresh game               |
+| Reset the grid        | `Ctrl + Home`  | Clear the grid (keeps the same letters)               |
+| Add top row           | `Ctrl + ↑`     | Add a row above the grid                              |
+| Add bottom row        | `Ctrl + ↓`     | Add a row below the grid                              |
+| Add left column       | `Ctrl + ←`     | Add a column to the left of the grid                  |
+| Add right column      | `Ctrl + →`     | Add a column to the right of the grid                 |
+| Toggle header, footer | `Ctrl + Del`   | Hide/show the header and footer for more space        |
+| Toggle button text    | `Ctrl + Space` | Switch the toolbar between text labels and icons only |
 
 The grid starts at 10×10. Add rows and columns as needed to fit longer words or more complex arrangements.
 
@@ -36,17 +36,19 @@ Words works in any modern browser and can be installed as an app. Look for the i
 
 ## Development
 
-**Stack:** Vanilla JS · Vite 8 · Sass · Vitest · ESLint · Yarn 4 · Node 24
+**Stack:** Vanilla JS · Vite 8 · Sass · Vitest · ESLint · Prettier · Yarn 4 · Node 24
 
 ```bash
-yarn dev        # Dev server at localhost:3080 (HMR)
-yarn build      # Production build → dist/
-yarn preview    # Preview production build at localhost:3080
-yarn lint       # Lint src and test files
-yarn lint:fix   # Lint and auto-fix
-yarn test       # Run test suite (single run)
-yarn test:watch # Run tests in watch mode
-yarn coverage   # Run tests with coverage report
+yarn dev           # Dev server at localhost:3080 (HMR)
+yarn build         # Production build → dist/
+yarn preview       # Preview production build at localhost:3080
+yarn format        # Format all files with Prettier
+yarn format:check  # Check formatting (no writes)
+yarn lint          # Lint src and test files
+yarn lint:fix      # Lint and auto-fix
+yarn test          # Run test suite (single run)
+yarn test:watch    # Run tests in watch mode
+yarn coverage      # Run tests with coverage report
 ```
 
 ## Testing
