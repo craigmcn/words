@@ -2,10 +2,11 @@ import { defineConfig } from 'vitest/config'
 import { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname, resolve } from 'path'
+import type { Plugin } from 'vite'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
-function serviceWorkerPlugin() {
+function serviceWorkerPlugin(): Plugin {
     return {
         name: 'service-worker',
         apply: 'build',
@@ -30,7 +31,7 @@ export default defineConfig(({ mode }) => ({
                 entryFileNames: 'js/[name].js',
                 chunkFileNames: 'js/[name].js',
                 assetFileNames: assetInfo =>
-                    /\.css$/i.test(assetInfo.name ?? '')
+                    /\.css$/i.test(assetInfo.names[0] ?? '')
                         ? 'css/[name][extname]'
                         : 'assets/[name][extname]',
             },
