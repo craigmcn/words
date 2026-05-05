@@ -80,6 +80,7 @@ Vitest is configured in `vite.config.js` (`test.globals: true`, `test.environmen
 - **Vitest 4** — replaced Jest + jest-environment-jsdom; config inline in `vite.config.js` (`globals: true`, `environment: jsdom`)
 - **CI** — `test.yml` updated: `corepack enable` → `setup-node` with `cache: yarn` → `yarn install --immutable` → lint → build → `yarn coverage`
 - **Branch protection** — require PR, 1 approval, `enforce_admins: false` (owner bypass), require `test` status check, dismiss stale reviews, block force push + deletion
+- **Husky** — pre-commit hook runs `yarn lint && yarn test` (PR #57)
 
 ### Key decisions
 - **TypeScript: N/A** — intentionally vanilla JS PWA (same as `cryptogram`); not worth the migration cost for a game with no shared types
@@ -87,8 +88,10 @@ Vitest is configured in `vite.config.js` (`test.globals: true`, `test.environmen
 - **CSS output** — Vite merges all CSS (albert.min.css + styles.scss + tippy.css) into a single `css/index.css`; sw.js updated accordingly
 - **Netlify copy** — `scripts/copy-netlify.mjs` copies individual entries from `netlify/` → `netlify/words/` (not the directory itself, to avoid self-copy error)
 
-### Nothing outstanding
-Modernization is complete. No open TODOs or blockers.
+### In progress
+- **ESLint indent** — switching 4-space → 2-space (PR #56)
+- **Husky** — pre-commit hooks (PR #57)
+- **vite.config.ts** — rename vite.config.js → vite.config.ts (planned)
 
 ---
 

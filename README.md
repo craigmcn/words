@@ -36,7 +36,7 @@ Words works in any modern browser and can be installed as an app. Look for the i
 
 ## Development
 
-**Stack:** Vanilla JS · Vite 8 · Sass · Vitest · ESLint · Yarn 4 · Node 24
+**Stack:** Vanilla JS · Vite 8 · Sass · Vitest · ESLint · Husky · Yarn 4 · Node 24
 
 ```bash
 yarn dev        # Dev server at localhost:3080 (HMR)
@@ -48,6 +48,8 @@ yarn test       # Run test suite (single run)
 yarn test:watch # Run tests in watch mode
 yarn coverage   # Run tests with coverage report
 ```
+
+A pre-commit hook (husky) runs `yarn lint && yarn test` automatically before each commit.
 
 ## Testing
 
