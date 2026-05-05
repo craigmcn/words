@@ -80,6 +80,7 @@ Vitest is configured in `vite.config.ts` (`test.globals: true`, `test.environmen
 - **Vitest 4** — replaced Jest + jest-environment-jsdom; config inline in `vite.config.ts` (`globals: true`, `environment: jsdom`)
 - **CI** — `test.yml` updated: `corepack enable` → `setup-node` with `cache: yarn` → `yarn install --immutable` → lint → build → `yarn coverage`
 - **Branch protection** — require PR, 1 approval, `enforce_admins: false` (owner bypass), require `test` status check, dismiss stale reviews, block force push + deletion
+- **Husky** — pre-commit hook runs `yarn lint && yarn test` (PR #57)
 
 ### Key decisions
 - **TypeScript: N/A** — intentionally vanilla JS PWA (same as `cryptogram`); not worth the migration cost for a game with no shared types
@@ -96,4 +97,4 @@ Vitest is configured in `vite.config.ts` (`test.globals: true`, `test.environmen
 
 ### Code style
 
-ESLint enforces: single quotes, no semicolons, 4-space indent (`SwitchCase: 1`), trailing commas on multiline, `arrow-parens` only when required for block bodies.
+ESLint enforces: single quotes, no semicolons, 2-space indent (`SwitchCase: 1`), trailing commas on multiline, `arrow-parens` only when required for block bodies.
