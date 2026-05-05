@@ -69,7 +69,7 @@ Vitest + jsdom. Test files live in `test/`. Run with `yarn test`.
 - **`test/toggle.test.js`** — header/footer and button-text toggles, localStorage persistence, `swapIcons`
 - **`test/keyboard.test.js`** — all `Ctrl+` shortcuts dispatch the correct function (modules mocked via `vi.mock`)
 
-Vitest is configured in `vite.config.js` (`test.globals: true`, `test.environment: 'jsdom'`). No separate `babel.config.js` or `jest.config.js`.
+Vitest is configured in `vite.config.ts` (`test.globals: true`, `test.environment: 'jsdom'`). No separate `babel.config.js` or `jest.config.js`.
 
 ## Modernization status (2026-05-01)
 
@@ -77,7 +77,7 @@ Vitest is configured in `vite.config.js` (`test.globals: true`, `test.environmen
 - **Node 24** — `.nvmrc` bumped from v22 → v24 (PR #52)
 - **Yarn 4** — switched from npm; `.yarnrc.yml` (node-modules linker); empty `yarn.lock` required to signal standalone project (parent dir has a Yarn workspace root)
 - **Vite 8** — replaced Gulp + Browserify + Babel; `root: src/`, `base: './'` for relative URLs under `/words/` sub-path
-- **Vitest 4** — replaced Jest + jest-environment-jsdom; config inline in `vite.config.js` (`globals: true`, `environment: jsdom`)
+- **Vitest 4** — replaced Jest + jest-environment-jsdom; config inline in `vite.config.ts` (`globals: true`, `environment: jsdom`)
 - **CI** — `test.yml` updated: `corepack enable` → `setup-node` with `cache: yarn` → `yarn install --immutable` → lint → build → `yarn coverage`
 - **Branch protection** — require PR, 1 approval, `enforce_admins: false` (owner bypass), require `test` status check, dismiss stale reviews, block force push + deletion
 - **Husky** — pre-commit hook runs `yarn lint && yarn test` (PR #57)
@@ -91,7 +91,7 @@ Vitest is configured in `vite.config.js` (`test.globals: true`, `test.environmen
 ### In progress
 - **ESLint indent** — switching 4-space → 2-space (PR #56)
 - **Husky** — pre-commit hooks (PR #57)
-- **vite.config.ts** — rename vite.config.js → vite.config.ts (planned)
+- **vite.config.ts** — renamed from vite.config.js (PR #58)
 
 ---
 
