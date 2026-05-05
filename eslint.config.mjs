@@ -39,7 +39,7 @@ export default defineConfig([{
         quotes: ['error', 'single'],
         semi: ['error', 'never'],
 
-        indent: ['error', 4, {
+        indent: ['error', 2, {
             SwitchCase: 1,
         }],
 

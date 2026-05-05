@@ -94,4 +94,4 @@ Modernization is complete. No open TODOs or blockers.
 
 ### Code style
 
-ESLint enforces: single quotes, no semicolons, 4-space indent (`SwitchCase: 1`), trailing commas on multiline, `arrow-parens` only when required for block bodies.
+ESLint enforces: single quotes, no semicolons, 2-space indent (`SwitchCase: 1`), trailing commas on multiline, `arrow-parens` only when required for block bodies.
