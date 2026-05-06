@@ -2,6 +2,7 @@ import { defineConfig } from 'vitest/config'
 import { readFileSync } from 'fs'
 import { fileURLToPath } from 'url'
 import { dirname, resolve } from 'path'
+import type { Plugin } from 'vite'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
