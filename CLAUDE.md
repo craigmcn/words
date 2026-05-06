@@ -83,14 +83,14 @@ Vitest is configured in `vite.config.ts` (`test.globals: true`, `test.environmen
 - **Vitest 4** — replaced Jest + jest-environment-jsdom; config inline in `vite.config.ts` (`globals: true`, `environment: jsdom`)
 - **CI** — `test.yml` updated: `corepack enable` → `setup-node` with `cache: yarn` → `yarn install --immutable` → lint → build → `yarn coverage`
 - **Branch protection** — require PR, 1 approval, `enforce_admins: false` (owner bypass), require `test` status check, dismiss stale reviews, block force push + deletion
-- **Husky** — pre-commit hook runs `yarn lint && yarn test` (PR #57)
-
-### In progress
-
-- **ESLint indent** — switching 4-space → 2-space (PR #56)
-- **Husky** — pre-commit hooks: `yarn lint && yarn test` (PR #57)
-- **vite.config.ts** — renamed from vite.config.js; also fixes Rollup 4 `assetInfo.names` deprecation (PR #58)
+- **ESLint indent** — switched from 4-space to 2-space (PR #56)
+- **Husky** — pre-commit hook runs `yarn format:check && yarn lint && yarn test` (PRs #57, #60)
+- **vite.config.ts** — renamed from `vite.config.js`; fixes Rollup 4 `assetInfo.names` deprecation (PR #58)
 - **Prettier** — formatting for JS/HTML/CSS/SCSS; ESLint simplified to code-quality rules only (PR #59)
+
+### Nothing outstanding
+
+Cross-repo sync complete. No open TODOs or blockers.
 
 ### Key decisions
 
