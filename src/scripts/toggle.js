@@ -26,12 +26,12 @@ export const toggleHeaderFooter = () => {
 
 const showButtonText = () => {
   window.localStorage.removeItem('iconsOnly')
-  buttonText.forEach(b => b.classList.remove('visually-hidden'))
+  buttonText.forEach((b) => b.classList.remove('visually-hidden'))
 }
 
 export const hideButtonText = () => {
   window.localStorage.setItem('iconsOnly', 'true')
-  buttonText.forEach(b => b.classList.add('visually-hidden'))
+  buttonText.forEach((b) => b.classList.add('visually-hidden'))
 }
 
 export const toggleButtonText = () => {
@@ -45,7 +45,7 @@ export const toggleButtonText = () => {
 
 // Swap icons
 export const swapIcons = (el) => {
-  [...el.querySelectorAll('svg')].forEach((s) => {
+  ;[...el.querySelectorAll('svg')].forEach((s) => {
     if (s.hasAttribute('hidden')) {
       s.removeAttribute('hidden')
     } else {

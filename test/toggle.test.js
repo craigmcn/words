@@ -1,4 +1,10 @@
-import { hideHeaderFooter, toggleHeaderFooter, hideButtonText, toggleButtonText, swapIcons } from '../src/scripts/toggle'
+import {
+  hideHeaderFooter,
+  toggleHeaderFooter,
+  hideButtonText,
+  toggleButtonText,
+  swapIcons,
+} from '../src/scripts/toggle'
 
 beforeEach(() => {
   localStorage.clear()
@@ -12,8 +18,12 @@ beforeEach(() => {
 describe('hideHeaderFooter', () => {
   it('adds visually-hidden to header and footer', () => {
     hideHeaderFooter()
-    expect(document.getElementById('header').classList.contains('visually-hidden')).toBe(true)
-    expect(document.getElementById('footer').classList.contains('visually-hidden')).toBe(true)
+    expect(
+      document.getElementById('header').classList.contains('visually-hidden'),
+    ).toBe(true)
+    expect(
+      document.getElementById('footer').classList.contains('visually-hidden'),
+    ).toBe(true)
   })
 
   it('sets compress in localStorage', () => {
@@ -25,14 +35,18 @@ describe('hideHeaderFooter', () => {
 describe('toggleHeaderFooter', () => {
   it('hides header/footer when visible', () => {
     toggleHeaderFooter()
-    expect(document.getElementById('header').classList.contains('visually-hidden')).toBe(true)
+    expect(
+      document.getElementById('header').classList.contains('visually-hidden'),
+    ).toBe(true)
   })
 
   it('shows header/footer when hidden', () => {
     document.getElementById('header').classList.add('visually-hidden')
     document.getElementById('footer').classList.add('visually-hidden')
     toggleHeaderFooter()
-    expect(document.getElementById('header').classList.contains('visually-hidden')).toBe(false)
+    expect(
+      document.getElementById('header').classList.contains('visually-hidden'),
+    ).toBe(false)
   })
 
   it('removes compress from localStorage when showing', () => {

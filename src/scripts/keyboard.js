@@ -1,6 +1,4 @@
-import {
-  roll,
-} from './game'
+import { roll } from './game'
 import {
   addRowTop,
   addRowBottom,
@@ -8,10 +6,7 @@ import {
   addColumnRight,
   resetGrid,
 } from './grid'
-import {
-  toggleButtonText,
-  toggleHeaderFooter,
-} from './toggle'
+import { toggleButtonText, toggleHeaderFooter } from './toggle'
 
 export const handleKeyboard = (e) => {
   if (e.ctrlKey) {

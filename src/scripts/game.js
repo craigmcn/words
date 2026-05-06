@@ -1,14 +1,6 @@
-import {
-  buildLetters,
-} from './letters'
-import {
-  buildGrid,
-} from './grid'
-import {
-  swapIcons,
-  hideButtonText,
-  hideHeaderFooter,
-} from './toggle'
+import { buildLetters } from './letters'
+import { buildGrid } from './grid'
+import { swapIcons, hideButtonText, hideHeaderFooter } from './toggle'
 
 export const STORAGEID = 'game'
 

@@ -1,14 +1,6 @@
-import {
-  getGame,
-  setGame,
-} from './game'
-import {
-  resetLetters,
-} from './letters'
-import {
-  initDragging,
-  initDropping,
-} from './dragDrop'
+import { getGame, setGame } from './game'
+import { resetLetters } from './letters'
+import { initDragging, initDropping } from './dragDrop'
 
 const $words = document.getElementById('words__grid').querySelector('tbody')
 
@@ -16,9 +8,7 @@ const $words = document.getElementById('words__grid').querySelector('tbody')
 export const getHeight = () => {
   const game = getGame()
   const {
-    grid: {
-      height,
-    },
+    grid: { height },
   } = game
   return height
 }
@@ -38,9 +28,7 @@ export const setHeight = (height) => {
 export const getWidth = () => {
   const game = getGame()
   const {
-    grid: {
-      width,
-    },
+    grid: { width },
   } = game
   return width
 }
@@ -58,9 +46,7 @@ export const setWidth = (width) => {
 
 /* Create and update grid */
 export const buildGrid = (props) => {
-  const {
-    height = getHeight(), width = getWidth(), stored = true,
-  } = props
+  const { height = getHeight(), width = getWidth(), stored = true } = props
   const game = getGame()
   $words.innerHTML = ''
   for (let r = 0; r < height; r++) {
@@ -87,8 +73,8 @@ export const updateGrid = (letter, row, column) => {
 }
 
 const indexGrid = () => {
-  [...$words.querySelectorAll('tr')].forEach((tr, r) => {
-    [...tr.querySelectorAll('td')].forEach((td, c) => {
+  ;[...$words.querySelectorAll('tr')].forEach((tr, r) => {
+    ;[...tr.querySelectorAll('td')].forEach((td, c) => {
       td.dataset.row = r
       td.dataset.col = c
     })
@@ -97,9 +83,7 @@ const indexGrid = () => {
 
 export const createGridCell = (r, c, stored = true) => {
   const {
-    grid: {
-      rows,
-    },
+    grid: { rows },
   } = getGame()
   const cell = document.createElement('td')
   cell.className = 'words__cell'
@@ -143,8 +127,8 @@ const addRow = (direction = 'top') => {
 }
 
 const addColumn = (direction = 'left') => {
-  const game = getGame();
-  [...$words.querySelectorAll('tr')].forEach((tr, r) => {
+  const game = getGame()
+  ;[...$words.querySelectorAll('tr')].forEach((tr, r) => {
     if (direction === 'left') {
       tr.insertBefore(createGridCell(r, 0, false), tr.firstChild)
       game.grid.rows[r].unshift('')

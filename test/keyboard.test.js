@@ -18,7 +18,13 @@ vi.mock('../src/scripts/toggle', () => ({
 }))
 
 import { roll } from '../src/scripts/game'
-import { resetGrid, addRowTop, addRowBottom, addColumnLeft, addColumnRight } from '../src/scripts/grid'
+import {
+  resetGrid,
+  addRowTop,
+  addRowBottom,
+  addColumnLeft,
+  addColumnRight,
+} from '../src/scripts/grid'
 import { toggleHeaderFooter, toggleButtonText } from '../src/scripts/toggle'
 
 const ctrlKey = (keyCode) => {

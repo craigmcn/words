@@ -1,5 +1,17 @@
 import { getGame, setGame } from '../src/scripts/game'
-import { getHeight, getWidth, setHeight, setWidth, updateGrid, createGridCell, createGridRow, addRowTop, addRowBottom, addColumnLeft, addColumnRight } from '../src/scripts/grid'
+import {
+  getHeight,
+  getWidth,
+  setHeight,
+  setWidth,
+  updateGrid,
+  createGridCell,
+  createGridRow,
+  addRowTop,
+  addRowBottom,
+  addColumnLeft,
+  addColumnRight,
+} from '../src/scripts/grid'
 
 const makeGame = (height = 3, width = 3) => ({
   letters: [],

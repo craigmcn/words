@@ -1,21 +1,14 @@
-import {
-  setComplete,
-} from './game'
-import {
-  $letters,
-  updateLetter,
-} from './letters'
-import {
-  updateGrid,
-} from './grid'
+import { setComplete } from './game'
+import { $letters, updateLetter } from './letters'
+import { updateGrid } from './grid'
 
 /* Dragging and Dropping */
 let dragSource, dropTarget
 
-const getDragSource = el =>
+const getDragSource = (el) =>
   el.classList.contains('words__cell') ? el : el.closest('ul')
 const getDropTarget = getDragSource
-const isDropTarget = el =>
+const isDropTarget = (el) =>
   el.classList.contains('words__cell') || !!el.closest('ul')
 
 const handleDragStart = (e) => {

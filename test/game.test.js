@@ -1,4 +1,11 @@
-import { dice, defaultGame, STORAGEID, getGame, setGame, setComplete } from '../src/scripts/game'
+import {
+  dice,
+  defaultGame,
+  STORAGEID,
+  getGame,
+  setGame,
+  setComplete,
+} from '../src/scripts/game'
 
 beforeEach(() => {
   localStorage.clear()
@@ -10,11 +17,11 @@ describe('dice', () => {
   })
 
   it('each die has 6 faces', () => {
-    dice.forEach(d => expect(d).toHaveLength(6))
+    dice.forEach((d) => expect(d).toHaveLength(6))
   })
 
   it('all faces are single characters', () => {
-    dice.forEach(d => d.forEach(face => expect(face).toHaveLength(1)))
+    dice.forEach((d) => d.forEach((face) => expect(face).toHaveLength(1)))
   })
 })
 
@@ -36,7 +43,10 @@ describe('getGame', () => {
   })
 
   it('returns parsed game from localStorage', () => {
-    const state = { letters: [{ letter: 'A', used: false }], grid: { height: 5, width: 5, rows: [] } }
+    const state = {
+      letters: [{ letter: 'A', used: false }],
+      grid: { height: 5, width: 5, rows: [] },
+    }
     localStorage.setItem(STORAGEID, JSON.stringify(state))
     expect(getGame()).toEqual(state)
   })

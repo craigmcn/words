@@ -31,7 +31,7 @@ self.addEventListener('install', (event) => {
   event.waitUntil(
     caches
       .open(PRECACHE)
-      .then(cache => cache.addAll(PRECACHE_URLS))
+      .then((cache) => cache.addAll(PRECACHE_URLS))
       .then(self.skipWaiting()),
   )
 })
@@ -44,7 +44,7 @@ self.addEventListener('activate', (event) => {
       .keys()
       .then((cacheNames) => {
         return cacheNames.filter(
-          cacheName => !currentCaches.includes(cacheName),
+          (cacheName) => !currentCaches.includes(cacheName),
         )
       })
       .then((cachesToDelete) => {
@@ -69,7 +69,10 @@ self.addEventListener('message', (event) => {
 // from the network before returning it to the page.
 self.addEventListener('fetch', (event) => {
   // Skip cross-origin requests, like those for Google Analytics, and POSTs.
-  if (event.request.url.startsWith(self.location.origin) && event.request.method !== 'POST') {
+  if (
+    event.request.url.startsWith(self.location.origin) &&
+    event.request.method !== 'POST'
+  ) {
     event.respondWith(
       caches.match(event.request).then((cachedResponse) => {
         if (cachedResponse) {
@@ -79,11 +82,9 @@ self.addEventListener('fetch', (event) => {
         return caches.open(RUNTIME).then((cache) => {
           return fetch(event.request).then((response) => {
             // Put a copy of the response in the runtime cache.
-            return cache
-              .put(event.request, response.clone())
-              .then(() => {
-                return response
-              })
+            return cache.put(event.request, response.clone()).then(() => {
+              return response
+            })
           })
         })
       }),

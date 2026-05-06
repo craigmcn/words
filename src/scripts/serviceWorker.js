@@ -1,6 +1,4 @@
-import {
-  STORAGEID,
-} from './game'
+import { STORAGEID } from './game'
 
 const registerServiceWorker = () => {
   // https://deanhume.com/displaying-a-new-version-available-progressive-web-app/

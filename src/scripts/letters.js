@@ -1,13 +1,5 @@
-import {
-  dice,
-  getGame,
-  setGame,
-  setComplete,
-} from './game'
-import {
-  initDragging,
-  initDropping,
-} from './dragDrop'
+import { dice, getGame, setGame, setComplete } from './game'
+import { initDragging, initDropping } from './dragDrop'
 
 export const $letters = document.getElementById('letters__list')
 
@@ -50,12 +42,12 @@ export const buildLetters = (stored = true) => {
 
 export const resetLetters = () => {
   const game = getGame()
-  const letters = game.letters;
-  [...document.querySelectorAll('.letters__item')].forEach((el) => {
+  const letters = game.letters
+  ;[...document.querySelectorAll('.letters__item')].forEach((el) => {
     el.classList.remove('used')
     el.draggable = true
   })
-  letters.forEach(l => (l.used = false))
+  letters.forEach((l) => (l.used = false))
   setComplete($letters)
   setGame({
     ...game,
