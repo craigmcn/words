@@ -1,43 +1,43 @@
-import { roll } from './game'
+import { roll } from "./game";
 import {
   addRowTop,
   addRowBottom,
   addColumnLeft,
   addColumnRight,
   resetGrid,
-} from './grid'
-import { toggleButtonText, toggleHeaderFooter } from './toggle'
+} from "./grid";
+import { toggleButtonText, toggleHeaderFooter } from "./toggle";
 
 export const handleKeyboard = (e) => {
   if (e.ctrlKey) {
-    e.preventDefault()
+    e.preventDefault();
 
     switch (e.keyCode) {
       case 13: // Enter
-        roll()
-        break
+        roll();
+        break;
       case 36: // Home
-        resetGrid()
-        break
+        resetGrid();
+        break;
       case 37: // Arrow left
-        addColumnLeft()
-        break
+        addColumnLeft();
+        break;
       case 38: // Arrow up
-        addRowTop()
-        break
+        addRowTop();
+        break;
       case 39: // Arrow right
-        addColumnRight()
-        break
+        addColumnRight();
+        break;
       case 40: // Arrow down
-        addRowBottom()
-        break
+        addRowBottom();
+        break;
       case 46: // Delete
-        toggleHeaderFooter()
-        break
+        toggleHeaderFooter();
+        break;
       case 32: // Space
-        toggleButtonText()
-        break
+        toggleButtonText();
+        break;
       default:
     }
   }
-}
+};

@@ -1,35 +1,35 @@
-import { STORAGEID } from './game'
+import { STORAGEID } from "./game";
 
 const registerServiceWorker = () => {
   // https://deanhume.com/displaying-a-new-version-available-progressive-web-app/
-  let newWorker
-  document.getElementById('reload').addEventListener('click', (e) => {
-    e.preventDefault()
+  let newWorker;
+  document.getElementById("reload").addEventListener("click", (e) => {
+    e.preventDefault();
     newWorker.postMessage({
-      action: 'skipWaiting',
-    })
-    window.sessionStorage.removeItem(STORAGEID)
-    window.localStorage.removeItem(STORAGEID)
-    window.location.reload()
-  })
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js').then((reg) => {
-      reg.addEventListener('updatefound', () => {
-        newWorker = reg.installing
-        newWorker.addEventListener('statechange', () => {
+      action: "skipWaiting",
+    });
+    window.sessionStorage.removeItem(STORAGEID);
+    window.localStorage.removeItem(STORAGEID);
+    window.location.reload();
+  });
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js").then((reg) => {
+      reg.addEventListener("updatefound", () => {
+        newWorker = reg.installing;
+        newWorker.addEventListener("statechange", () => {
           switch (newWorker.state) {
-            case 'installed':
+            case "installed":
               if (navigator.serviceWorker.controller) {
                 document
-                  .getElementById('notification')
-                  .removeAttribute('hidden')
+                  .getElementById("notification")
+                  .removeAttribute("hidden");
               }
-              break
+              break;
           }
-        })
-      })
-    })
+        });
+      });
+    });
   }
-}
+};
 
-export default registerServiceWorker
+export default registerServiceWorker;

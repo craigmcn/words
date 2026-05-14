@@ -8,4 +8,4 @@ document.body.innerHTML = `
     <button id="toggleButtonText"><svg></svg><svg hidden="true"></svg></button>
     <span class="js-canHide"></span>
     <table id="words__grid"><tbody></tbody></table>
-`
+`;
