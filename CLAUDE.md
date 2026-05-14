@@ -103,4 +103,4 @@ Cross-repo sync complete. No open TODOs or blockers.
 
 ### Code style
 
-Prettier handles all formatting (JS, HTML, CSS/SCSS) with settings in `.prettierrc`: no semicolons, single quotes, 2-space indent, trailing commas. ESLint (`eslint.config.mjs`) is scoped to code-quality rules only — `no-console` warn, `js.configs.recommended`. Formatting rules have been removed from ESLint to avoid conflicts. Run `yarn format` to reformat; `yarn format:check` for CI.
+Prettier handles all formatting (JS, HTML, CSS/SCSS) with `.prettierrc: {}` (all defaults). ESLint (`eslint.config.mjs`) is scoped to code-quality rules only — `no-console` warn, `js.configs.recommended`. Formatting rules have been removed from ESLint to avoid conflicts. Run `yarn format` to reformat; `yarn format:check` for CI.

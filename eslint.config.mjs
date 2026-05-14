@@ -1,6 +1,6 @@
-import globals from 'globals'
-import js from '@eslint/js'
-import eslintConfigPrettier from 'eslint-config-prettier'
+import globals from "globals";
+import js from "@eslint/js";
+import eslintConfigPrettier from "eslint-config-prettier";
 
 export default [
   js.configs.recommended,
@@ -11,11 +11,11 @@ export default [
         ...globals.node,
       },
       ecmaVersion: 12,
-      sourceType: 'module',
+      sourceType: "module",
     },
   },
   {
-    files: ['test/**/*.js'],
+    files: ["test/**/*.js"],
     languageOptions: {
       globals: {
         ...globals.jest,
@@ -24,8 +24,8 @@ export default [
   },
   {
     rules: {
-      'no-console': 'warn',
+      "no-console": "warn",
     },
   },
   eslintConfigPrettier,
-]
+];
