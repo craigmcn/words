@@ -88,9 +88,9 @@ Vitest is configured in `vite.config.ts` (`test.globals: true`, `test.environmen
 - **vite.config.ts** — renamed from `vite.config.js`; fixes Rollup 4 `assetInfo.names` deprecation (PR #58)
 - **Prettier** — formatting for JS/HTML/CSS/SCSS; ESLint simplified to code-quality rules only (PR #59)
 
-### Nothing outstanding
+### Open TODOs
 
-Cross-repo sync complete. No open TODOs or blockers.
+Tracked as issues in the [words GitHub Project](https://github.com/users/craigmcn/projects/12) (GitHub Actions bump, axe tooling, Playwright E2E).
 
 ### Key decisions
 
