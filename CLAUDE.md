@@ -15,6 +15,7 @@ yarn lint            # Lint src and test JS files
 yarn lint:fix        # Lint and auto-fix src and test JS files
 yarn test            # Run Vitest test suite (single run)
 yarn test:watch      # Run Vitest in watch mode
+yarn test:e2e        # Run Playwright E2E suite (starts its own dev server)
 yarn coverage        # Run Vitest with coverage report
 ```
 
@@ -72,6 +73,18 @@ Vitest + jsdom. Test files live in `test/`. Run with `yarn test`.
 - **`test/keyboard.test.js`** — all `Ctrl+` shortcuts dispatch the correct function (modules mocked via `vi.mock`)
 
 Vitest is configured in `vite.config.ts` (`test.globals: true`, `test.environment: 'jsdom'`). No separate `babel.config.js` or `jest.config.js`.
+
+The `test`/`test:watch`/`coverage` scripts run with `NODE_OPTIONS=--no-experimental-webstorage`: Node's own experimental global `localStorage` (stable by default from Node 24+) otherwise gets triggered by some test file's `window.localStorage` access, shadowing jsdom's per-file `window.localStorage` for every other test file sharing the same worker process.
+
+### E2E tests
+
+Playwright (Chromium only), config in `playwright.config.js`. Spec files live in `e2e/`, excluded from Vitest's glob. `webServer` boots `yarn dev` against `localhost:3080` and reuses an already-running dev server outside CI. Run with `yarn test:e2e`; CI only (not pre-commit, since browser install + startup is too slow for a hook).
+
+- **`e2e/words.spec.js`** — rolling a fresh letter set, adding grid rows/columns, dragging a letter onto the grid and back off, toggling header/footer and button-text visibility
+
+### Playwright browser install
+
+Install the Chromium browser once: `yarn playwright install --with-deps chromium`. CI caches `~/.cache/ms-playwright` keyed on `yarn.lock`.
 
 ## Modernization status (2026-05-01)
 
