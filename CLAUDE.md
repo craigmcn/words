@@ -71,10 +71,11 @@ Vitest + jsdom. Test files live in `test/`. Run with `yarn test`.
 - **`test/grid.test.js`** — height/width accessors, `updateGrid`, cell/row creation, `addRow*`/`addColumn*`
 - **`test/toggle.test.js`** — header/footer and button-text toggles, localStorage persistence, `swapIcons`
 - **`test/keyboard.test.js`** — all `Ctrl+` shortcuts dispatch the correct function (modules mocked via `vi.mock`)
+- **`test/accessibility.test.js`** — runs `axe-core` directly against jsdom (no browser) using the real `src/index.html` body markup, catching a11y violations without a Playwright run; `color-contrast` disabled since jsdom doesn't render layout
 
 Vitest is configured in `vite.config.ts` (`test.globals: true`, `test.environment: 'jsdom'`). No separate `babel.config.js` or `jest.config.js`.
 
-The `test`/`test:watch`/`coverage` scripts run with `NODE_OPTIONS=--no-experimental-webstorage`: Node's own experimental global `localStorage` (stable by default from Node 24+) otherwise gets triggered by some test file's `window.localStorage` access, shadowing jsdom's per-file `window.localStorage` for every other test file sharing the same worker process.
+The `test`/`test:watch`/`coverage` scripts run with `NODE_OPTIONS=--no-experimental-webstorage`: Node's own experimental global `localStorage` (stable by default since Node 24) otherwise gets probed by `axe-core` on import, which shadows jsdom's per-file `window.localStorage` for every other test file sharing the same worker process.
 
 ### E2E tests
 
@@ -90,7 +91,7 @@ Install the Chromium browser once: `yarn playwright install --with-deps chromium
 
 ### Completed
 
-- **Node 24** — `.nvmrc` bumped from v22 → v24 (PR #52)
+- **Node 24** — `.node-version` bumped from v22 → v24 (PR #52)
 - **Yarn 4** — switched from npm; `.yarnrc.yml` (node-modules linker); empty `yarn.lock` required to signal standalone project (parent dir has a Yarn workspace root)
 - **Vite 8** — replaced Gulp + Browserify + Babel; `root: src/`, `base: './'` for relative URLs under `/words/` sub-path
 - **Vitest 4** — replaced Jest + jest-environment-jsdom; config inline in `vite.config.ts` (`globals: true`, `environment: jsdom`)
