@@ -2,6 +2,9 @@
   "name": "words",
   "version": "1.4.0",
   "description": "A word tile game based on Wonderful Word Weaving (http://wonderfulwordweaving.com/).",
+  "resolutions": {
+    "undici@npm:^7.25.0": "^7.29.0"
+  },
   "scripts": {
     "prepare": "husky",
     "dev": "vite",
