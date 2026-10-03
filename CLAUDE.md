@@ -92,15 +92,16 @@ Install the Chromium browser once: `yarn playwright install --with-deps chromium
 ### Completed
 
 - **Node 24** — `.node-version` bumped from v22 → v24 (PR #52)
-- **Yarn 4** — switched from npm; `.yarnrc.yml` (node-modules linker); empty `yarn.lock` required to signal standalone project (parent dir has a Yarn workspace root)
+- **Yarn 4** — switched from npm; `.yarnrc.yml` (node-modules linker, no `yarnPath` — Corepack supplies Yarn from `packageManager`); empty `yarn.lock` required to signal standalone project (parent dir has a Yarn workspace root)
 - **Vite 8** — replaced Gulp + Browserify + Babel; `root: src/`, `base: './'` for relative URLs under `/words/` sub-path
-- **Vitest 4** — replaced Jest + jest-environment-jsdom; config inline in `vite.config.ts` (`globals: true`, `environment: jsdom`)
-- **CI** — `test.yml` updated: `corepack enable` → `setup-node` with `cache: yarn` → `yarn install --immutable` → lint → build → `yarn coverage`
+- **Vitest 5** — replaced Jest + jest-environment-jsdom; config inline in `vite.config.ts` (`globals: true`, `environment: jsdom`)
+- **CI** — `test.yml` updated: `corepack enable` → `setup-node` with `cache: yarn` → `yarn install --immutable` → format:check → lint → build → `yarn coverage`
 - **Branch protection** — require PR, 1 approval, `enforce_admins: false` (owner bypass), require `test` status check, dismiss stale reviews, block force push + deletion
 - **ESLint indent** — switched from 4-space to 2-space (PR #56)
 - **Husky** — pre-commit hook runs `yarn format:check && yarn lint && yarn test` (PRs #57, #60)
 - **vite.config.ts** — renamed from `vite.config.js`; fixes Rollup 4 `assetInfo.names` deprecation (PR #58)
 - **Prettier** — formatting for JS/HTML/CSS/SCSS; ESLint simplified to code-quality rules only (PR #59)
+- **2026 Fall dependency review** (#89) — Vitest 5, jsdom 30, ESLint 10 + globals 17; `"type": "module"` in `package.json` (clears Vite 8.3 native-config-loader warning); restored missing `husky` devDependency; dropped the obsolete `undici@^7` resolution (jsdom 30 uses undici 8)
 
 ### Open TODOs
 
@@ -117,4 +118,4 @@ Tracked as issues in the [words GitHub Project](https://github.com/users/craigmc
 
 ### Code style
 
-Prettier handles all formatting (JS, HTML, CSS/SCSS) with `.prettierrc: {}` (all defaults). ESLint (`eslint.config.mjs`) is scoped to code-quality rules only — `no-console` warn, `js.configs.recommended`. Formatting rules have been removed from ESLint to avoid conflicts. Run `yarn format` to reformat; `yarn format:check` for CI.
+Prettier handles all formatting (JS, HTML, CSS/SCSS) with `.prettierrc: {}` (all defaults). ESLint 10 (`eslint.config.mjs`) is scoped to code-quality rules only — `no-console` warn, `js.configs.recommended`. Formatting rules have been removed from ESLint to avoid conflicts. Run `yarn format` to reformat; `yarn format:check` for CI.
