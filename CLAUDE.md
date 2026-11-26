@@ -31,7 +31,7 @@ This is a vanilla JS browser game — a word tile app based on Wonderful Word We
 - **Service worker:** `src/sw.js` with `{buildtime}` placeholder replaced by a custom Vite plugin at build time → `{env}/sw.js`
 - **Static:** `src/site.webmanifest` → `{env}/assets/site.webmanifest`
 
-The `--mode netlify` flag outputs to `./netlify`; a post-build script (`scripts/copy-netlify.mjs`) copies everything to `./netlify/words/` for Netlify routing under the `/words/` sub-path.
+Deployed only to Netlify (site `gracious-hamilton-bcda9d`, no GitHub Pages), served at both `/` and `/words/`; craigmcn.com proxies `/words/*` there. The inline script in `src/index.html` turns `craigmcn.com/words` into `/words/`, since Netlify redirect rules can't add a trailing slash. The `--mode netlify` flag outputs to `./netlify`; a post-build script (`scripts/copy-netlify.mjs`) copies everything to `./netlify/words/` for Netlify routing under the `/words/` sub-path.
 
 ### Game state
 
@@ -94,7 +94,7 @@ Install the Chromium browser once: `yarn playwright install --with-deps chromium
 
 - **Node 24** — `.node-version` bumped from v22 → v24 (PR #52)
 - **Yarn 4** — switched from npm; `.yarnrc.yml` (node-modules linker, no `yarnPath` — Corepack supplies Yarn from `packageManager`); empty `yarn.lock` required to signal standalone project (parent dir has a Yarn workspace root)
-- **Vite 8** — replaced Gulp + Browserify + Babel; `root: src/`; `base` is `/words/` for `--mode netlify` (craigmcn.com's proxy serves `/words` without a trailing slash, and Netlify redirect rules can't add one, so relative URLs would resolve against `/`) and `./` otherwise (GitHub Pages redirects `/words` → `/words/` itself)
+- **Vite 8** — replaced Gulp + Browserify + Babel; `root: src/`; `base` is `/words/` for `--mode netlify` (craigmcn.com's proxy serves `/words` without a trailing slash, and Netlify redirect rules can't add one, so relative URLs would resolve against `/`) and `./` otherwise (`yarn dev`, `yarn preview` and e2e run at `/`)
 - **Vitest 5** — replaced Jest + jest-environment-jsdom; config inline in `vite.config.ts` (`globals: true`, `environment: jsdom`)
 - **CI** — `test.yml` updated: `corepack enable` → `setup-node` with `cache: yarn` → `yarn install --immutable` → format:check → lint → build → `yarn coverage`
 - **Branch protection** — require PR, 1 approval, `enforce_admins: false` (owner bypass), require `test` status check, dismiss stale reviews, block force push + deletion
@@ -113,7 +113,7 @@ Tracked as issues in the [words GitHub Project](https://github.com/users/craigmc
 - **TypeScript: N/A** — intentionally vanilla JS PWA (same as `cryptogram`); not worth the migration cost for a game with no shared types
 - **Service worker** — hand-rolled `sw.js` (no workbox/vite-plugin-pwa); `{buildtime}` replaced via a custom Vite plugin in `generateBundle`; PRECACHE_URLS updated to merged `css/index.css` + `js/index.js`
 - **CSS output** — Vite merges all CSS (albert.min.css + styles.scss + tippy.css) into a single `css/index.css`; sw.js updated accordingly
-- **Security headers** — `netlify.toml` (`[build]` + `[[headers]]` for `/*`) sets CSP, nosniff, Referrer-Policy, Permissions-Policy (Netlify only; GitHub Pages can't). CSP allows the inline trailing-slash redirect by `sha256` hash and Google Fonts (`albert.min.css` `@import`s Raleway) via `style-src`/`font-src`. Editing that inline script means updating the hash; use CSS classes (e.g. `.icon--2x`), never `style=` attributes
+- **Security headers** — `netlify.toml` (`[build]` + `[[headers]]` for `/*`) sets CSP, nosniff, Referrer-Policy, Permissions-Policy (Netlify is the only deploy target; no GitHub Pages). CSP allows the inline trailing-slash redirect by `sha256` hash and Google Fonts (`albert.min.css` `@import`s Raleway) via `style-src`/`font-src`. Editing that inline script means updating the hash; use CSS classes (e.g. `.icon--2x`), never `style=` attributes
 - **Netlify copy** — `scripts/copy-netlify.mjs` copies individual entries from `netlify/` → `netlify/words/` (not the directory itself, to avoid self-copy error)
 
 ---
