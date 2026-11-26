@@ -72,6 +72,7 @@ Vitest + jsdom. Test files live in `test/`. Run with `yarn test`.
 - **`test/toggle.test.js`** — header/footer and button-text toggles, localStorage persistence, `swapIcons`
 - **`test/keyboard.test.js`** — all `Ctrl+` shortcuts dispatch the correct function (modules mocked via `vi.mock`)
 - **`test/accessibility.test.js`** — runs `axe-core` directly against jsdom (no browser) using the real `src/index.html` body markup, catching a11y violations without a Playwright run; `color-contrast` disabled since jsdom doesn't render layout
+- **`test/securityHeaders.test.js`** — hashes every inline `<script>` in `src/index.html` and asserts the hash is in `netlify.toml`'s CSP; also fails on any inline `style=` attribute (would need `'unsafe-inline'`)
 
 Vitest is configured in `vite.config.ts` (`test.globals: true`, `test.environment: 'jsdom'`). No separate `babel.config.js` or `jest.config.js`.
 
@@ -112,6 +113,7 @@ Tracked as issues in the [words GitHub Project](https://github.com/users/craigmc
 - **TypeScript: N/A** — intentionally vanilla JS PWA (same as `cryptogram`); not worth the migration cost for a game with no shared types
 - **Service worker** — hand-rolled `sw.js` (no workbox/vite-plugin-pwa); `{buildtime}` replaced via a custom Vite plugin in `generateBundle`; PRECACHE_URLS updated to merged `css/index.css` + `js/index.js`
 - **CSS output** — Vite merges all CSS (albert.min.css + styles.scss + tippy.css) into a single `css/index.css`; sw.js updated accordingly
+- **Security headers** — `netlify.toml` (`[build]` + `[[headers]]` for `/*`) sets CSP, nosniff, Referrer-Policy, Permissions-Policy (Netlify only; GitHub Pages can't). CSP allows the inline trailing-slash redirect by `sha256` hash and Google Fonts (`albert.min.css` `@import`s Raleway) via `style-src`/`font-src`. Editing that inline script means updating the hash; use CSS classes (e.g. `.icon--2x`), never `style=` attributes
 - **Netlify copy** — `scripts/copy-netlify.mjs` copies individual entries from `netlify/` → `netlify/words/` (not the directory itself, to avoid self-copy error)
 
 ---

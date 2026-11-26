@@ -1,0 +1,15 @@
+[build]
+  command = "yarn build:netlify"
+  publish = "netlify"
+
+# CSP lists only directives that differ from default-src 'self'. index.html's
+# inline trailing-slash redirect must run before relative URLs resolve, so it's
+# allowed by hash; test/securityHeaders.test.js fails if the two drift apart.
+# albert.min.css @imports Raleway from Google Fonts, hence style-src/font-src.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-FGALV05D4g7G4BENEzItcsKln/YAzSyPZhwTWZS+i2g='; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()"
