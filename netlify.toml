@@ -2,10 +2,9 @@
   command = "yarn build:netlify"
   publish = "netlify"
 
-# CSP lists only directives that differ from default-src 'self'. index.html's
-# inline trailing-slash redirect must run before relative URLs resolve, so it's
+# CSP lists only directives that differ from default-src 'self' (Google Fonts
+# for albert.min.css's Raleway @import). The inline trailing-slash redirect is
 # allowed by hash; test/securityHeaders.test.js fails if the two drift apart.
-# albert.min.css @imports Raleway from Google Fonts, hence style-src/font-src.
 [[headers]]
   for = "/*"
   [headers.values]

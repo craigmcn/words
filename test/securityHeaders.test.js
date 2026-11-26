@@ -11,6 +11,17 @@ const netlifyToml = readFileSync(
   "utf-8",
 );
 
+// Only the script-src directive counts: a hash anywhere else in the file
+// (a comment, another directive) wouldn't let the browser run the script.
+function scriptSrcSources(toml) {
+  const csp = toml.match(/^\s*Content-Security-Policy\s*=\s*"([^"]*)"/m)?.[1];
+  const directive = csp
+    ?.split(";")
+    .map((part) => part.trim().split(/\s+/))
+    .find(([name]) => name === "script-src");
+  return directive ? directive.slice(1) : [];
+}
+
 async function sha256Base64(text) {
   const digest = await crypto.subtle.digest(
     "SHA-256",
@@ -34,9 +45,23 @@ describe("Content-Security-Policy", () => {
     const scripts = inlineScripts(indexHtml);
     expect(scripts.length).toBeGreaterThan(0);
 
-    for (const script of scripts) {
-      expect(netlifyToml).toContain(`'sha256-${await sha256Base64(script)}'`);
-    }
+    const expected = await Promise.all(
+      scripts.map(async (script) => `'sha256-${await sha256Base64(script)}'`),
+    );
+    const allowed = scriptSrcSources(netlifyToml).filter((source) =>
+      source.startsWith("'sha256-"),
+    );
+    // Exact match also catches stale hashes left behind after an edit.
+    expect(allowed.sort()).toEqual([...new Set(expected)].sort());
+  });
+
+  it("reads script-src only from the CSP header value", () => {
+    const toml = [
+      "# 'sha256-inComment='",
+      `  Content-Security-Policy = "default-src 'self'; script-src 'self' 'sha256-real='; style-src 'sha256-wrong='"`,
+    ].join("\n");
+
+    expect(scriptSrcSources(toml)).toEqual(["'self'", "'sha256-real='"]);
   });
 
   it("finds inline scripts whatever their attributes or case", () => {
@@ -60,8 +85,11 @@ describe("Content-Security-Policy", () => {
     ]);
   });
 
-  // Style attributes would need 'unsafe-inline'; use a class instead.
-  it("has no inline style attributes in index.html", () => {
+  // These would all need 'unsafe-inline'; use CSS classes and
+  // addEventListener in the bundled code instead.
+  it("has no inline styles or event handlers in index.html", () => {
     expect(indexHtml).not.toMatch(/\sstyle\s*=/i);
+    expect(indexHtml).not.toMatch(/<style\b/i);
+    expect(indexHtml).not.toMatch(/\son[a-z]+\s*=/i);
   });
 });
