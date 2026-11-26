@@ -8,6 +8,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 yarn dev             # Start Vite dev server at localhost:3080
 yarn build           # Build for production (output: ./dist)
 yarn build:netlify   # Build for Netlify deployment (output: ./netlify + ./netlify/words/)
+yarn check:netlify   # Check the Netlify build's asset + precache URLs resolve under /words/ (CI)
 yarn preview         # Preview production build at localhost:3080
 yarn format          # Format all files with Prettier
 yarn format:check    # Check formatting (CI-safe, no writes)
@@ -28,7 +29,7 @@ This is a vanilla JS browser game — a word tile app based on Wonderful Word We
 - **Entry:** `src/index.html` — Vite root is `src/`
 - **Styles:** `src/styles/styles.scss` and `src/styles/albert.min.css` linked from HTML; `tippy.js/dist/tippy.css` imported via JS; all merged into `{env}/css/index.css`
 - **Scripts:** `src/scripts/index.js` → bundled by Vite/Rollup → `{env}/js/index.js`
-- **Service worker:** `src/sw.js` with `{buildtime}` placeholder replaced by a custom Vite plugin at build time → `{env}/sw.js`
+- **Service worker:** `src/sw.js` with `{buildtime}` and `{base}` placeholders replaced by a custom Vite plugin at build time → `{env}/sw.js`; `{base}` keeps the precached CSS/JS paths matching what `index.html` loads
 - **Static:** `src/site.webmanifest` → `{env}/assets/site.webmanifest`
 
 Deployed only to Netlify (site `gracious-hamilton-bcda9d`, no GitHub Pages), served at both `/` and `/words/`; craigmcn.com proxies `/words/*` there. The inline script in `src/index.html` turns `craigmcn.com/words` into `/words/`, since Netlify redirect rules can't add a trailing slash. The `--mode netlify` flag outputs to `./netlify`; a post-build script (`scripts/copy-netlify.mjs`) copies everything to `./netlify/words/` for Netlify routing under the `/words/` sub-path.

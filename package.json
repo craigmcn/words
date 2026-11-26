@@ -8,6 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "build:netlify": "vite build --mode netlify && node scripts/copy-netlify.mjs",
+    "check:netlify": "node scripts/check-netlify-build.mjs",
     "preview": "vite preview --port 3080",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
