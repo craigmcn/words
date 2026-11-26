@@ -145,6 +145,11 @@ footer {
   width: 1.25em;
 }
 
+// A class, not a style attribute, so the CSP needs no 'unsafe-inline'.
+.icon--2x {
+  font-size: 2em;
+}
+
 [draggable="true"] {
   cursor: move;
 }
