@@ -94,7 +94,7 @@ Install the Chromium browser once: `yarn playwright install --with-deps chromium
 
 - **Node 24** — `.node-version` bumped from v22 → v24 (PR #52)
 - **Yarn 4** — switched from npm; `.yarnrc.yml` (node-modules linker, no `yarnPath` — Corepack supplies Yarn from `packageManager`); empty `yarn.lock` required to signal standalone project (parent dir has a Yarn workspace root)
-- **Vite 8** — replaced Gulp + Browserify + Babel; `root: src/`, `base: './'` for relative URLs under `/words/` sub-path
+- **Vite 8** — replaced Gulp + Browserify + Babel; `root: src/`; `base` is `/words/` for `--mode netlify` (craigmcn.com's proxy serves `/words` without a trailing slash, and Netlify redirect rules can't add one, so relative URLs would resolve against `/`) and `./` otherwise (GitHub Pages redirects `/words` → `/words/` itself)
 - **Vitest 5** — replaced Jest + jest-environment-jsdom; config inline in `vite.config.ts` (`globals: true`, `environment: jsdom`)
 - **CI** — `test.yml` updated: `corepack enable` → `setup-node` with `cache: yarn` → `yarn install --immutable` → format:check → lint → build → `yarn coverage`
 - **Branch protection** — require PR, 1 approval, `enforce_admins: false` (owner bypass), require `test` status check, dismiss stale reviews, block force push + deletion

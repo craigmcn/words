@@ -22,7 +22,10 @@ function serviceWorkerPlugin() {
 
 export default defineConfig(({ mode }) => ({
   root: "src",
-  base: "./",
+  // Netlify is reached as /words/ through craigmcn.com's proxy, which can't add
+  // the trailing slash (redirect rules ignore it). An absolute base keeps assets
+  // resolving at /words; GitHub Pages redirects itself, so "./" is fine there.
+  base: mode === "netlify" ? "/words/" : "./",
   server: { port: 3080 },
   preview: { port: 3080 },
   build: {
