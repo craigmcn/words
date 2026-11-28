@@ -6,7 +6,10 @@ const indexHtml = readFileSync(
   resolve(process.cwd(), "src/index.html"),
   "utf-8",
 );
-const script = indexHtml.match(/<script>(.*?)<\/script>/s)?.[1];
+// Picked by content, not position, so another inline script can't stand in.
+const script = [...indexHtml.matchAll(/<script\b[^>]*>(.*?)<\/script>/gs)]
+  .map((match) => match[1])
+  .find((body) => body.includes("location.replace"));
 
 // Runs the real inline script against a fake location, since jsdom can't
 // navigate. Returns the URL it redirected to, or null.
@@ -20,8 +23,8 @@ function redirectFor(url) {
 }
 
 describe("trailing-slash redirect", () => {
-  it("finds the inline script", () => {
-    expect(script).toBeTruthy();
+  it("finds the redirect script", () => {
+    expect(script).toBeDefined();
   });
 
   it.each([
