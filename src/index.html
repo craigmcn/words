@@ -11,10 +11,15 @@
       content="A word tile game based on Wonderful Word Weaving (http://wonderfulwordweaving.com/)."
     />
 
+    <!-- Netlify redirect rules can't add a trailing slash, so do it here. Only
+         slashless paths with no file extension, keeping the query and hash. -->
     <script>
-      (() =>
-        !window.location.pathname.endsWith("/") &&
-        window.location.replace(window.location.href + "/"))();
+      (() => {
+        const { pathname, search, hash } = window.location;
+        if (/\/[^/.]+$/.test(pathname)) {
+          window.location.replace(pathname + "/" + search + hash);
+        }
+      })();
     </script>
 
     <link
